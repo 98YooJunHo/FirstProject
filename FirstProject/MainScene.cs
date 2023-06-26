@@ -10,7 +10,7 @@ namespace FirstProject
     public class MainScene
     {
         // 커서 위치 (37,0)부터 시작 y 마지막 좌표 28
-        public void Do(ref CharacterBase chr, ref int count, ref int act)
+        public string Do(ref CharacterBase chr, ref int count, ref int act)
         {
             Clear();
             System.ConsoleKeyInfo playerInput;
@@ -94,16 +94,25 @@ namespace FirstProject
             }
 
             Expedition Run = new Expedition();
+            List<Fate> fates = new List<Fate>();
             int _case = 0;
+            // while 시작
             while (true)
             {
                 _case = Run.Exp(ref act, ref count, _case);
-                if (Console.CursorTop != 24 || Console.CursorTop != 18)  // 캐릭터 정보창이나 보스 정보창이 떠 있을 경우가 아닐 때
+                if (Console.CursorTop != 18 || Console.CursorTop != 24)  // 캐릭터 정보창이나 보스 정보창이 떠 있을 경우가 아닐 때
                 {
-                    Run.Print(_case);
+                    if (_case == 5 && fates.Count == 0)
+                    {
+                        fates = Run.Choice_Fate(fates, _case);
+                    }
                 }
-                playerInput = Console.ReadKey();
 
+                Clear_Info();
+                Run.Print(fates, _case);
+
+                playerInput = Console.ReadKey();
+                // switch() 시작
                 switch (playerInput.Key)
                 {
                     case ConsoleKey.I:
@@ -114,13 +123,18 @@ namespace FirstProject
                             Print_ChrInfo(chr);
                             while (true)
                             {
-                                playerInput = Console.ReadKey();
-                                if (playerInput.Key == ConsoleKey.Enter)
+                                System.ConsoleKeyInfo playerInput1;
+                                playerInput1 = Console.ReadKey();
+                                if (playerInput1.Key == ConsoleKey.Enter)
                                 {
-                                    Clear_Info();
                                     break;
                                 }
-                                else { /*pass*/ }
+                                else 
+                                {
+                                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                                    Console.Write(" ");
+                                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                                }
                             }
                             break;
                         }
@@ -137,28 +151,34 @@ namespace FirstProject
                             Print_BossInfo(boss);
                             while (true)
                             {
-                                playerInput = Console.ReadKey();
-                                if (playerInput.Key == ConsoleKey.Enter)
+                                System.ConsoleKeyInfo playerInput1;
+                                playerInput1 = Console.ReadKey();
+                                if (playerInput1.Key == ConsoleKey.Enter)
                                 {
-                                    Clear_Info();
                                     break;
                                 }
-                                else { /*pass*/ }
+                                else 
+                                {
+                                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                                    Console.Write(" ");
+                                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                                }
                             }
                             break;
                         }
-                    case ConsoleKey.Enter:
+                    case ConsoleKey.Escape:
                         {
-                            break;
+                            return ("종료");
                         }
                     default:
                         {
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                            Console.Write(" ");
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                             break;
                         }
-                }
-            }
-
-
+                }   // switch();
+            }   // while;
         }
 
         void Clear()
@@ -202,7 +222,7 @@ namespace FirstProject
 
             for (int i = 0; i < chr.Get_Ability_Length(); i++)
             {
-                Console.SetCursorPosition(41, 9 + i);
+                Console.SetCursorPosition(40, 9 + i);
                 Ability tempAbility = chr.Get_Ability(i);
                 Console.Write(tempAbility.name + "Lv:" + tempAbility.lvl);
             }

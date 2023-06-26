@@ -2,6 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,6 @@ namespace FirstProject
             while (true)
             {
                 CharacterBase player = new CharacterBase();
-                //System.ConsoleKeyInfo playerInput;
                 string chr;
                 int count = 1;
                 int act = 1;
@@ -32,6 +32,16 @@ namespace FirstProject
                     {
                         Character cha = new Character();
                         cha.Print(ref chr);
+                        if (chr == "종료")
+                        {
+                            return;
+                        }
+
+                        if (chr == "타이틀로")
+                        {
+                            break;
+                        }
+
                         if (chr == "재선택")
                         {
                             continue;
@@ -48,11 +58,24 @@ namespace FirstProject
                     }
                 }
 
+                if (chr == "타이틀로")
+                {
+                    continue;
+                }
                 // 메인 씬 진입
                 while (true)
                 {
                     MainScene main = new MainScene();
-                    main.Do(ref player, ref count, ref act);
+                    chr = main.Do(ref player, ref count, ref act);
+                    if (chr == "종료") 
+                    {
+                        return;
+                    }
+
+                    if (chr == "타이틀로")
+                    {
+                        break;
+                    }
                     break;
                 }
                 break;

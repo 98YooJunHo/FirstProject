@@ -47,6 +47,7 @@
     <Compile Include="Character.cs" />
     <Compile Include="CharacterBase.cs" />
     <Compile Include="Expedition.cs" />
+    <Compile Include="Fate.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Knight.cs" />
     <Compile Include="MainScene.cs" />
