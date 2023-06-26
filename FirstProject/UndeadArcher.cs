@@ -14,6 +14,7 @@ namespace FirstProject
         {
             name = "되살아난 궁수";
             hp = Convert.ToInt32(60 * difficult);
+            maxHp = Convert.ToInt32(60 * difficult);
             atk = Convert.ToInt32(11 * difficult);
             cri = Convert.ToInt32(8 * difficult);
             avoid = Convert.ToInt32(2 * difficult);

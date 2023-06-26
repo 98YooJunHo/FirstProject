@@ -11,6 +11,7 @@ namespace FirstProject
         // 커서 위치 (37,0)부터 시작 y 마지막 좌표 28
         public void Print()
         {
+            Clear();
             Console.SetCursorPosition(49, 1);
             Console.Write("겨울의 탑 타이틀 씬 입니다");
             Console.SetCursorPosition(52, 27);
@@ -46,6 +47,17 @@ namespace FirstProject
                     }
                     else
                     { /* empty */ }
+                }
+            }
+        }
+        void Clear()
+        {
+            for (int y = 0; y < 29; y++)
+            {
+                for (int x = 0; x < 49; x++)
+                {
+                    Console.SetCursorPosition(x + 37, y);
+                    Console.WriteLine(" ");
                 }
             }
         }

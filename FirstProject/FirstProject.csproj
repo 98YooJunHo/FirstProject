@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ability.cs" />
+    <Compile Include="Character.cs" />
     <Compile Include="CharacterBase.cs" />
+    <Compile Include="Expedition.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Knight.cs" />
     <Compile Include="MainScene.cs" />
@@ -51,6 +54,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectScene.cs" />
+    <Compile Include="Skill.cs" />
     <Compile Include="StarveTree.cs" />
     <Compile Include="TitleScene.cs" />
     <Compile Include="UndeadArcher.cs" />
