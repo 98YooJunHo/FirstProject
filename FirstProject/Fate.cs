@@ -11,5 +11,12 @@ namespace FirstProject
         public string name;
         public string abilityName;
         public int abilityLvl;
+
+        public void Init(string nam, string abNam, int abLvl)
+        {
+            name = nam;
+            abilityName = abNam;
+            abilityLvl = abLvl;
+        }
     }
 }

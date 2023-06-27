@@ -10,7 +10,7 @@ namespace FirstProject
     {
         public StarveTree(float difficult)
         {
-            name = "메마른 거목";
+            name = "메마른 소나무";
             hp = Convert.ToInt32(200 * difficult);
             maxHp = Convert.ToInt32(200 * difficult);
             atk = Convert.ToInt32(19 * difficult);

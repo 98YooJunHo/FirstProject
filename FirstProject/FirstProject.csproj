@@ -44,11 +44,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ability.cs" />
-    <Compile Include="Character.cs" />
+    <Compile Include="BattleScene.cs" />
+    <Compile Include="CharacterSelect.cs" />
     <Compile Include="CharacterBase.cs" />
     <Compile Include="Expedition.cs" />
     <Compile Include="Fate.cs" />
+    <Compile Include="FateList.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="ItemList.cs" />
     <Compile Include="Knight.cs" />
     <Compile Include="MainScene.cs" />
     <Compile Include="MonsterBase.cs" />

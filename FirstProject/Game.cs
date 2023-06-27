@@ -30,7 +30,7 @@ namespace FirstProject
                     chr = Select.Print();
                     if (chr != null)
                     {
-                        Character cha = new Character();
+                        CharacterSelect cha = new CharacterSelect();
                         cha.Print(ref chr);
                         if (chr == "종료")
                         {
@@ -78,7 +78,7 @@ namespace FirstProject
                     }
                     break;
                 }
-                break;
+                return;
             }
         }
     }

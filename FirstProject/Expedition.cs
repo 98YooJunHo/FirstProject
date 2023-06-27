@@ -11,13 +11,13 @@ namespace FirstProject
     {
         Random random = new Random();
 
-        public int Exp(ref int act ,ref int count, int cas)
+        public int Exp(int act ,int count, int cas)
         {
             int case_ = 0;
             
             if(cas != 0)
             {
-                return 0;
+                return cas;
             }
 
             if(act == 1 && count == 1)
@@ -37,12 +37,12 @@ namespace FirstProject
                 case_ = 2;
                 return case_;
             }
-            else if(battleRate < 33) 
+            else if(battleRate < 50) 
             {
                 case_ = 3;
                 return case_;
             }
-            else if(battleRate > 32)
+            else if(battleRate > 49)
             {
                 case_ = 4;
                 return case_;
@@ -58,24 +58,36 @@ namespace FirstProject
                     {
                         Console.SetCursorPosition(47,8);
                         Console.Write("여정 중 모닥불을 마주쳤습니다");
+                        Console.SetCursorPosition(40, 17);
+                        Console.Write("휴식한다");
+                        Console.SetCursorPosition(40, 19);
+                        Console.Write("명상한다");
                         break;
                     }
                 case 2:
                     {
                         Console.SetCursorPosition(52, 8);
                         Console.Write("보스를 마주쳤습니다");
+                        Console.SetCursorPosition(40, 17);
+                        Console.Write("싸운다");
                         break;
                     }
                 case 3:
                     {
                         Console.SetCursorPosition(53, 8);
                         Console.Write("적을 마주쳤습니다");
+                        Console.SetCursorPosition(40, 17);
+                        Console.Write("싸운다");
                         break;
                     }
                 case 4:
                     {
-                        Console.SetCursorPosition(51, 8);
-                        Console.Write("이벤트를 마주쳤습니다");
+                        Console.SetCursorPosition(53, 8);
+                        Console.Write("샘을 마주쳤습니다");
+                        Console.SetCursorPosition(40, 17);
+                        Console.Write("마신다");
+                        Console.SetCursorPosition(40, 19);
+                        Console.Write("지나간다");
                         break;
                     }
                 case 5:
@@ -105,43 +117,29 @@ namespace FirstProject
 
         public List<Fate> Choice_Fate(List<Fate> fates_,int cas)
         {
-            List<Fate> fates = new List<Fate>();
+            FateList fates = new FateList();
             List<Fate> selectedFates = new List<Fate>();
-            Fate fate = new Fate();
-            Fate fate1 = new Fate();
-            Fate fate2 = new Fate();
-            fate.name = "지독한";
-            fate.abilityName = "맹독";
-            fate.abilityLvl = 1;
-            fates.Add(fate);
-            fate1.name = "튼튼한";
-            fate1.abilityName = "철갑";
-            fate1.abilityLvl = 1;
-            fates.Add(fate1);
-            fate2.name = "민첩한";
-            fate2.abilityName = "회피";
-            fate2.abilityLvl = 1;
-            fates.Add(fate2);
 
             for (int i = 0; i < 1000; i++)
             {
-                int randomIndex = random.Next(fates.Count-1);
+                int randomIndex = random.Next(fates.list.Count-1);
                 Fate temp = new Fate();
-                temp = fates[randomIndex];
-                fates[randomIndex] = fates[randomIndex+1];
-                fates[randomIndex + 1] = temp;
+                temp = fates.list[randomIndex];
+                fates.list[randomIndex] = fates.list[randomIndex+1];
+                fates.list[randomIndex + 1] = temp;
             }
 
             for(int i = 0; i < 3; i ++)
             {
                 Fate temp = new Fate();
-                temp.name = fates[i].name;
-                temp.abilityName = fates[i].abilityName;
-                temp.abilityLvl = fates[i].abilityLvl;
+                temp.name = fates.list[i].name;
+                temp.abilityName = fates.list[i].abilityName;
+                temp.abilityLvl = fates.list[i].abilityLvl;
                 selectedFates.Add(temp);
             }
 
             return selectedFates;
         }
+
     }
 }

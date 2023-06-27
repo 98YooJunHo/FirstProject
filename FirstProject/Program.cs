@@ -10,8 +10,14 @@ namespace FirstProject
     {
         static void Main(string[] args)
         {
+            Console.CursorVisible = false;
             Game game = new Game();
             game.Start();
+
+            //BattleScene scene = new BattleScene();
+            //Knight knight = new Knight();
+            //UndeadArcher archer = new UndeadArcher(1);
+            //scene.Do(knight, archer);
         }
     }
 }

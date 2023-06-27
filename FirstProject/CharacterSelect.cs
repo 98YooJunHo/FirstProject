@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FirstProject
 {
-    public class Character
+    public class CharacterSelect
     {
         int chrNumber = 0;
         // 커서 위치 (37,0)부터 시작 y 마지막 좌표 28
