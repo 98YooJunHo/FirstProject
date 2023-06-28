@@ -78,7 +78,7 @@ namespace FirstProject
                     }
                     break;
                 }
-                return;
+                continue;
             }
         }
     }

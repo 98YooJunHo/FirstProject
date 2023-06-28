@@ -541,7 +541,10 @@ namespace FirstProject
                 Skill tempSkill = chr.Get_Skills(i);
                 Console.Write(tempSkill.name);
                 Console.SetCursorPosition(44 + (i * 5), 21);
-                Console.Write(tempSkill.cooltime);
+                if (tempSkill.cooltime != 0)
+                {
+                    Console.Write(tempSkill.cooltime);
+                }
             }
 
             Console.SetCursorPosition(59, 24);

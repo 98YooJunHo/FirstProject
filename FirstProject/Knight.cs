@@ -11,9 +11,9 @@ namespace FirstProject
         public Knight()
         {
             name = "기사";
-            hp = 1700;
-            maxHp = 1700;
-            atk = 110;
+            hp = 170;
+            maxHp = 170;
+            atk = 11;
             arm = 14;
             cri = 9;
             avoid = 4;

@@ -16,6 +16,13 @@ namespace FirstProject
             System.ConsoleKeyInfo playerInput;
             System.ConsoleKeyInfo rewardInput;
             int count = 1;
+            int reduction = 0;
+            int poison = 0;
+            int getPoison = 0;
+            int inBattleAtk = chr.Get_Atk();
+            int inBattleArm = chr.Get_Arm();
+            int inBattleCri = chr.Get_Cri();
+            int inBattleAvoid = chr.Get_Avoid();
 
             // 바깥 테두리
             for (int y = 0; y < 29; y++)
@@ -159,9 +166,83 @@ namespace FirstProject
                 }
             }
 
+            foreach(Ability ability in chr.abilities)
+            {
+                if (ability.name == "맹독")
+                {
+                    int increase = 0;
+                    if (ability.lvl == 1)
+                    {
+                        increase += 1;
+                    }
+
+                    for (int i = 0; i <= ability.lvl; i++)
+                    {
+                        increase += i/2;
+                    }
+
+                    poison = increase;
+                }
+
+                if (ability.name == "분노")
+                {
+                    int increase = 0;
+                    for (int i = 0; i <= ability.lvl; i++)
+                    {
+                        increase += i;
+                    }
+
+                    inBattleAtk = chr.Get_Atk() + increase;
+                }
+
+                if (ability.name == "철갑")
+                {
+                    int increase = 0;
+                    for (int i = 0; i <= ability.lvl; i++)
+                    {
+                        increase += i;
+                    }
+
+                    reduction = increase;
+                }
+
+                if (ability.name == "광기")
+                {
+                    int increase = 0;
+                    for (int i = 0; i <= ability.lvl; i++)
+                    {
+                        increase += i;
+                    }
+
+                    inBattleCri = chr.Get_Cri() + increase;
+                }
+
+                if (ability.name == "회피")
+                {
+                    int increase = 0;
+                    for (int i = 0; i <= ability.lvl; i++)
+                    {
+                        increase += i;
+                    }
+
+                    inBattleAvoid = chr.Get_Avoid() + increase;
+                }
+            }
+
             int pos = 0;
             while (true)
             {
+                if (getPoison != 0)
+                {
+                    Console.SetCursorPosition(80, 6);
+                    Console.Write("중독");
+                    Console.SetCursorPosition(82, 7);
+                    Console.Write(getPoison);
+                }
+                Console.SetCursorPosition(38, 20);
+                Console.Write("피해감소");
+                Console.SetCursorPosition(41, 21);
+                Console.Write(reduction);
                 int pCri = random.Next(100);
                 int pAvoid = random.Next(100);
                 int mCri = random.Next(100);
@@ -186,6 +267,17 @@ namespace FirstProject
                 Console.SetCursorPosition(38, 15);
                 #endregion
                 Console.Write("적이 공격을 준비합니다");
+                for (int i = 0; i < chr.Get_Skills_Length(); i++)
+                {
+                    Console.SetCursorPosition(41 + (i * 9), 25);
+                    Skill tempSkill = chr.Get_Skills(i);
+                    Console.Write(tempSkill.name);
+                    Console.SetCursorPosition(42 + (i * 9), 26);
+                    if (tempSkill.cooltime != 0)
+                    {
+                        Console.Write(tempSkill.cooltime);
+                    }
+                }
                 Console.SetCursorPosition(43 + pos * 9, 27);
                 Console.Write("▲");
                 playerInput = Console.ReadKey();
@@ -227,18 +319,36 @@ namespace FirstProject
                 {
                     Console.SetCursorPosition(38, 11);
                     Console.Write("(적 회피)");
+                    mob.Set_Hp(mob.Get_Hp() - getPoison);
+                    getPoison -= 1;
+                    if (getPoison < 0)
+                    {
+                        getPoison = 0;
+                    }
                 }
-                else if (pCri < chr.Get_Cri())
+                else if (pCri < inBattleCri)
                 {
                     Console.SetCursorPosition(38, 11);
-                    Console.Write("내 공격 " + (chr.Get_Atk() * 16) / 10 + "의 피해(크리티컬)");
-                    mob.Set_Hp(mob.Get_Hp() - (chr.Get_Atk() * 16) / 10);
+                    Console.Write("내 공격 " + inBattleAtk * 16 / 10 + "의 피해(크리티컬)");
+                    mob.Set_Hp(mob.Get_Hp() - inBattleAtk * 16 / 10 - getPoison);
+                    getPoison -= 1;
+                    getPoison += poison;
+                    if (getPoison < 0)
+                    {
+                        getPoison = 0;
+                    }
                 }
                 else
                 {
                     Console.SetCursorPosition(38, 11);
-                    Console.Write("내 공격 " + chr.Get_Atk() + "의 피해");
-                    mob.Set_Hp(mob.Get_Hp() - chr.Get_Atk());
+                    Console.Write("내 공격 " + inBattleAtk + "의 피해");
+                    mob.Set_Hp(mob.Get_Hp() - inBattleAtk - getPoison);
+                    getPoison -= 1;
+                    getPoison += poison;
+                    if (getPoison < 0)
+                    {
+                        getPoison = 0;
+                    }
                 }
 
                 if (mob.Get_Hp() <= 0)
@@ -438,30 +548,39 @@ namespace FirstProject
 
                 Console.SetCursorPosition(38, 13);
                 Console.Write("                                          ");
-                chr.Set_Hp(chr.Get_Hp() - mob.Get_Atk());
-                if (pAvoid < chr.Get_Avoid())
+                if (pAvoid < inBattleAvoid)
                 {
                     Console.SetCursorPosition(38, 13);
                     Console.Write("(회피)");
                 }
                 else if (mCri < mob.Get_Cri())
                 {
+                    int getDamage = (mob.Get_Atk() * 16 / 10) - reduction;
+                    if((mob.Get_Atk() * 16 / 10) - reduction < 0)
+                    {
+                        getDamage = 0;
+                    }
                     Console.SetCursorPosition(38, 13);
-                    Console.Write("적 공격 " + (mob.Get_Atk() * 16 / 10) + "의 피해(크리티컬)");
-                    chr.Set_Hp(chr.Get_Hp() - (mob.Get_Atk() * 16 / 10));
+                    Console.Write("적 공격 " + getDamage + "의 피해(크리티컬)");
+                    chr.Set_Hp(chr.Get_Hp() - getDamage);
                 }
                 else
                 {
+                    int getDamage = mob.Get_Atk() - reduction;
+                    if (mob.Get_Atk() - reduction < 0)
+                    {
+                        getDamage = 0;
+                    }
                     Console.SetCursorPosition(38, 13);
-                    Console.Write("적 공격 " + mob.Get_Atk() + "의 피해");
-                    chr.Set_Hp(chr.Get_Hp() - mob.Get_Atk());
+                    Console.Write("적 공격 " + getDamage + "의 피해");
+                    chr.Set_Hp(chr.Get_Hp() - getDamage);
                 }
 
                 if (chr.Get_Hp() <= 0)
                 {
                     chr.Set_Hp(0);
                     Console.SetCursorPosition(38, 14);
-                    Console.Write("플레이어 사망");
+                    Console.Write("플레이어 사망, 아무키나 눌러서 타이틀로 갑니다");
                     // 진행중인 턴 및 현재 체력 표시
                     #region
                     Console.SetCursorPosition(39, 2);
@@ -480,10 +599,11 @@ namespace FirstProject
                     Console.Write(chr.Get_Hp() + "/" + chr.Get_MaxHp());
                     Console.SetCursorPosition(38, 15);
                     #endregion
+
+                    Console.ReadKey();
                     return "배틀도중사망";
                 }
             }   // while
-
         }
 
         void Clear()

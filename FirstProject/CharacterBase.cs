@@ -35,6 +35,11 @@ namespace FirstProject
             {
                 hp = maxHp;
             }
+
+            if(hp < 0)
+            {
+                hp = 0;
+            }
         }
         public int Get_MaxHp()
         {
