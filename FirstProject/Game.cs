@@ -62,7 +62,7 @@ namespace FirstProject
                     Clear();
                     Console.SetCursorPosition(53, 14);
                     Console.Write("게임을 종료 합니다");
-                    Console.SetCursorPosition(42, 27);
+                    Console.SetCursorPosition(43, 27);
                     return;
                 }
 

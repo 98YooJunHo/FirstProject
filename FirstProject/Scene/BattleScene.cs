@@ -283,6 +283,7 @@ namespace FirstProject
             Console.SetCursorPosition(38, 15);
             Console.Write(whatMobDo);
             #endregion
+
             int pos = 0;
             while (true)
             {
@@ -435,6 +436,9 @@ namespace FirstProject
                         }
                     default:
                         {
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                            Console.Write(" ");
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                             continue;
                         }
                 }
@@ -830,6 +834,7 @@ namespace FirstProject
 
                 // 적의 행동 선택
                 #region
+
                 if (mob.Get_Type() == "보스몹")
                 {
                     mobDo = random.Next(4);

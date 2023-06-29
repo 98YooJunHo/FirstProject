@@ -5,6 +5,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Security.Cryptography;
 
 namespace FirstProject
 {
@@ -13,6 +14,39 @@ namespace FirstProject
         // 커서 위치 (37,0)부터 시작 y 마지막 좌표 28
         public string Do(ref CharacterBase chr, ref int count, ref int act)
         {
+            for (int y = 0; y < 29; y++)
+            {
+                for (int x = 0; x < 49; x++)
+                {
+                    Console.SetCursorPosition(x + 37, y);
+                    if (x == 0 && y == 0)
+                    {
+                        Console.Write("┌");
+                    }
+                    else if (x == 48 && y == 0)
+                    {
+                        Console.Write("┐");
+                    }
+                    else if (x == 0 && y == 28)
+                    {
+                        Console.Write("└");
+                    }
+                    else if (x == 48 && y == 28)
+                    {
+                        Console.Write("┘");
+                    }
+                    else if (y == 0 || y == 28)
+                    {
+                        Console.Write("─");
+                    }
+                    else if (x == 0 || x == 48)
+                    {
+                        Console.Write("│");
+                    }
+                    else
+                    { /* empty */ }
+                }
+            }
             Clear();
             Random random = new Random();
             System.ConsoleKeyInfo playerInput;
@@ -438,9 +472,14 @@ namespace FirstProject
                                     {
                                         if (battlePos == 0)
                                         {
-                                            MonsterBase mob = new StarveTree(1);
+                                            string isBossDeath;
+                                            MonsterBase mob = new MonsterBase();
+                                            if(act == 1)
+                                            {
+                                                mob = new StarveTree(1);
+                                            }
                                             BattleScene battle = new BattleScene();
-                                            battle.Do(chr, mob);
+                                            isBossDeath = battle.Do(chr, mob);
                                             _case = 0;
                                             count = 0;
                                             Clear();
@@ -478,10 +517,21 @@ namespace FirstProject
                                                     { /* empty */ }
                                                 }
                                             }
-                                            Console.SetCursorPosition(52, 14);
-                                            Console.Write("보스를 처치하였습니다");
-                                            Thread.Sleep(1000);
-                                            return "종료";
+
+                                            if (isBossDeath == "배틀윈")
+                                            {
+                                                act += 1;
+                                                count = 1;
+                                                Console.SetCursorPosition(52, 14);
+                                                Console.Write("보스를 처치하였습니다");
+                                                Thread.Sleep(1000);
+                                                break;
+                                            }
+
+                                            if (isBossDeath == "배틀도중사망")
+                                            {
+                                                return "타이틀로";
+                                            }
                                         }
                                         break;
                                     }
@@ -510,9 +560,9 @@ namespace FirstProject
 
         void Clear()
         {
-            for (int y = 0; y < 29; y++)
+            for (int y = 1; y < 28; y++)
             {
-                for (int x = 0; x < 49; x++)
+                for (int x = 1; x < 48; x++)
                 {
                     Console.SetCursorPosition(x + 37, y);
                     Console.WriteLine(" ");
