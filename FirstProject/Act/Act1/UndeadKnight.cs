@@ -16,6 +16,7 @@ namespace FirstProject
             atk = Convert.ToInt32(12 * difficult);
             cri = Convert.ToInt32(4 * difficult);
             avoid = Convert.ToInt32(2 * difficult);
+            type = "일반몹";
         }
     }
 }

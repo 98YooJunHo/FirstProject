@@ -21,10 +21,14 @@ namespace FirstProject
             int shield = 0;
             int poison = 0;
             int getPoison = 0;
+            int inBattleMobAtk = 0;
+            int inBattleMobCri = mob.Get_Cri();
             int inBattleAtk = chr.Get_Atk();
             int inBattleArm = chr.Get_Arm();
             int inBattleCri = chr.Get_Cri();
             int inBattleAvoid = chr.Get_Avoid();
+            int mobDo = 0;
+            string whatMobDo = null;
 
             // 바깥 테두리
             for (int y = 0; y < 29; y++)
@@ -169,7 +173,7 @@ namespace FirstProject
             }
 
             // 능력 체크
-            foreach(Ability ability in chr.abilities)
+            foreach (Ability ability in chr.abilities)
             {
                 if (ability.name == "맹독")
                 {
@@ -181,7 +185,7 @@ namespace FirstProject
 
                     for (int i = 0; i <= ability.lvl; i++)
                     {
-                        increase += i/2;
+                        increase += i / 2;
                     }
 
                     poison = increase;
@@ -237,6 +241,48 @@ namespace FirstProject
             Console.SetCursorPosition(59, 9);
             Console.Write(mob.Get_Hp() + "/" + mob.Get_MaxHp());
 
+            // 적의 행동 선택
+            #region
+            if (mob.Get_Type() == "보스몹")
+            {
+                mobDo = random.Next(4);
+            }
+            else
+            {
+                mobDo = random.Next(3);
+            }
+
+            switch (mobDo)
+            {
+                case 0:
+                    {
+                        inBattleMobAtk = Convert.ToInt32(mob.Get_Atk() * 0.8f);
+                        whatMobDo = "적이 급하게 공격하려 합니다";
+                        break;
+                    }
+                case 1:
+                    {
+                        inBattleMobAtk = Convert.ToInt32(mob.Get_Atk() * 1.0f);
+                        whatMobDo = "적이 공격을 준비합니다";
+                        break;
+                    }
+                case 2:
+                    {
+                        inBattleMobAtk = Convert.ToInt32(mob.Get_Atk() * 1.5f);
+                        whatMobDo = "적이 강력한 공격을 준비합니다";
+                        break;
+                    }
+                case 3:
+                    {
+                        inBattleMobAtk = Convert.ToInt32(mob.Get_Atk() * 2.0f);
+                        whatMobDo = "적이 치명적인 공격을 준비합니다";
+                        break;
+                    }
+
+            }
+            Console.SetCursorPosition(38, 15);
+            Console.Write(whatMobDo);
+            #endregion
             int pos = 0;
             while (true)
             {
@@ -248,6 +294,7 @@ namespace FirstProject
                 int pAvoid = random.Next(100);
                 int mCri = random.Next(100);
                 int mAvoid = random.Next(100);
+
                 playerInput = new ConsoleKeyInfo();
                 // 진행중인 턴 및 현재 체력 표시
                 #region
@@ -261,9 +308,9 @@ namespace FirstProject
                 Console.Write("          ");
                 Console.SetCursorPosition(58, 23);
                 Console.Write(chr.Get_Hp() + "/" + chr.Get_MaxHp());
-                Console.SetCursorPosition(38, 15);
                 #endregion
-                Console.Write("적이 공격을 준비합니다");
+
+
                 for (int i = 0; i < chr.Get_Skills_Length(); i++)
                 {
                     Skill tempSkill = chr.Get_Skill(i);
@@ -511,68 +558,30 @@ namespace FirstProject
                     Console.SetCursorPosition(71, 14);
                     Console.Write(items_[2].abilityName + "lv." + items_[2].abilityLvl);
                     // 아이템 스탯 표시
-                    Console.SetCursorPosition(44, 15);
-                    if (items_[0].atk != 0)
+                    for (int i = 0; i < 3; i++)
                     {
-                        Console.Write("공격력 + " + items_[0].atk);
-                    }
-                    if (items_[0].maxHp != 0)
-                    {
-                        Console.Write("최대체력 + " + items_[0].maxHp);
-                    }
-                    if (items_[0].arm != 0)
-                    {
-                        Console.Write("방어력 + " + items_[0].arm);
-                    }
-                    if (items_[0].cri != 0)
-                    {
-                        Console.Write("크리율 + " + items_[0].cri);
-                    }
-                    if (items_[0].avoid != 0)
-                    {
-                        Console.Write("회피율 + " + items_[0].avoid);
-                    }
-                    Console.SetCursorPosition(57, 15);
-                    if (items_[1].atk != 0)
-                    {
-                        Console.Write("공격력 + " + items_[1].atk);
-                    }
-                    if (items_[1].maxHp != 0)
-                    {
-                        Console.Write("최대체력 + " + items_[1].maxHp);
-                    }
-                    if (items_[1].arm != 0)
-                    {
-                        Console.Write("방어력 + " + items_[1].arm);
-                    }
-                    if (items_[1].cri != 0)
-                    {
-                        Console.Write("크리율 + " + items_[1].cri);
-                    }
-                    if (items_[1].avoid != 0)
-                    {
-                        Console.Write("회피율 + " + items_[1].avoid);
-                    }
-                    Console.SetCursorPosition(70, 15);
-                    if (items_[2].atk != 0)
-                    {
-                        Console.Write("공격력 + " + items_[2].atk);
-                    }
-                    if (items_[2].maxHp != 0)
-                    {
-                        Console.Write("최대체력 + " + items_[2].maxHp);
-                    }
-                    if (items_[2].arm != 0)
-                    {
-                        Console.Write("방어력 + " + items_[2].arm);
-                    }
-                    if (items_[2].cri != 0)
-                    {
-                        Console.Write("크리율 + " + items_[2].cri);
-                    }
-                    if (items_[2].avoid != 0)
-                    {
-                        Console.Write("회피율 + " + items_[2].avoid);
+                        Console.SetCursorPosition(44 + 13 * i, 15);
+                        if (items_[i].atk != 0)
+                        {
+                            Console.Write("공격력 + " + items_[i].atk);
+                        }
+                        if (items_[i].maxHp != 0)
+                        {
+                            Console.SetCursorPosition(43 + 13 * i, 15);
+                            Console.Write("최대체력 + " + items_[i].maxHp);
+                        }
+                        if (items_[i].arm != 0)
+                        {
+                            Console.Write("방어력 + " + items_[i].arm);
+                        }
+                        if (items_[i].cri != 0)
+                        {
+                            Console.Write("크리율 + " + items_[i].cri);
+                        }
+                        if (items_[i].avoid != 0)
+                        {
+                            Console.Write("회피율 + " + items_[i].avoid);
+                        }
                     }
                     #endregion
 
@@ -617,7 +626,7 @@ namespace FirstProject
                                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                                     Console.Write(" ");
                                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-                                    if(rCount == 1)
+                                    if (rCount == 1)
                                     {
                                         items_ = Choice_Item();
                                         // 보상 정보 초기화 후 재출력
@@ -764,8 +773,8 @@ namespace FirstProject
                 }
                 else if (mCri < mob.Get_Cri())
                 {
-                    int getDamage = (mob.Get_Atk() * 16 / 10) - reduction - shield;
-                    if((mob.Get_Atk() * 16 / 10) - reduction - shield < 0)
+                    int getDamage = (inBattleMobAtk * 16 / 10) - reduction - shield;
+                    if (inBattleMobAtk - reduction - shield < 0)
                     {
                         getDamage = 0;
                     }
@@ -775,8 +784,8 @@ namespace FirstProject
                 }
                 else
                 {
-                    int getDamage = mob.Get_Atk() - reduction - shield;
-                    if (mob.Get_Atk() - reduction - shield < 0)
+                    int getDamage = inBattleMobAtk - reduction - shield;
+                    if (inBattleMobAtk - reduction - shield < 0)
                     {
                         getDamage = 0;
                     }
@@ -818,6 +827,50 @@ namespace FirstProject
                     Console.ReadKey();
                     return "배틀도중사망";
                 }
+
+                // 적의 행동 선택
+                #region
+                if (mob.Get_Type() == "보스몹")
+                {
+                    mobDo = random.Next(4);
+                }
+                else
+                {
+                    mobDo = random.Next(3);
+                }
+
+                switch (mobDo)
+                {
+                    case 0:
+                        {
+                            inBattleMobAtk = Convert.ToInt32(mob.Get_Atk() * 0.8f);
+                            whatMobDo = "적이 급하게 공격하려 합니다";
+                            break;
+                        }
+                    case 1:
+                        {
+                            inBattleMobAtk = Convert.ToInt32(mob.Get_Atk() * 1.0f);
+                            whatMobDo = "적이 공격을 준비합니다";
+                            break;
+                        }
+                    case 2:
+                        {
+                            inBattleMobAtk = Convert.ToInt32(mob.Get_Atk() * 1.5f);
+                            whatMobDo = "적이 강력한 공격을 준비합니다";
+                            break;
+                        }
+                    case 3:
+                        {
+                            inBattleMobAtk = Convert.ToInt32(mob.Get_Atk() * 2.0f);
+                            whatMobDo = "적이 치명적인 공격을 준비합니다";
+                            break;
+                        }
+
+                }
+                Console.SetCursorPosition(38, 15);
+                Console.Write(whatMobDo);
+                #endregion
+
             }   // while
         }
 
@@ -892,6 +945,7 @@ namespace FirstProject
 
             if (items.maxHp != 0)
             {
+                chr.Set_Hp(chr.Get_Hp() + items.maxHp);
                 chr.Set_MaxHp(chr.Get_MaxHp() + items.maxHp);
             }
 

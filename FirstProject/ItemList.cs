@@ -9,8 +9,8 @@ namespace FirstProject
     public class ItemList
     {
         public List<Item> list = new List<Item>();
-        public ItemList() 
-        { 
+        public ItemList()
+        {
             Item item = new Item();
             Item item1 = new Item();
             Item item2 = new Item();
@@ -22,7 +22,7 @@ namespace FirstProject
             list.Add(item1);
             item2.Init("운동화", "회피", 1, 0, 0, 0, 1, 0);
             list.Add(item2);
-            item3.Init("프로틴", "분노", 1, 2, 0, 0, 0, 0);
+            item3.Init("프로틴", "분노", 1, 0, 15, 0, 0, 0);
             list.Add(item3);
             item4.Init("초록병", "광기", 1, 0, 0, 0, 0, 1);
             list.Add(item4);

@@ -9,7 +9,7 @@ namespace FirstProject
 {
     public class SelectScene
     {
-        public string Print()
+        public string Do()
         {
             Clear();
             System.ConsoleKeyInfo playerInput;
@@ -105,38 +105,18 @@ namespace FirstProject
                         {
                             if (Console.CursorTop == 3)
                             {
-                                Console.SetCursorPosition(54, 26);
-                                Console.Write("                    ");
-                                Console.SetCursorPosition(51, 27);
-                                Console.WriteLine("기사를 선택하셨습니다");
-                                Thread.Sleep(1000);
                                 return "기사";
                             }
                             if (Console.CursorTop == 5)
                             {
-                                Console.SetCursorPosition(54, 26);
-                                Console.Write("                    ");
-                                Console.SetCursorPosition(51, 27);
-                                Console.WriteLine("도적을 선택하셨습니다");
-                                Thread.Sleep(1000);
                                 return "도적";
                             }
                             if (Console.CursorTop == 7)
                             {
-                                Console.SetCursorPosition(54, 26);
-                                Console.Write("                    ");
-                                Console.SetCursorPosition(51, 27);
-                                Console.WriteLine("궁수를 선택하셨습니다");
-                                Thread.Sleep(1000);
                                 return "궁수";
                             }
                             if (Console.CursorTop == 9)
                             {
-                                Console.SetCursorPosition(54, 26);
-                                Console.Write("                    ");
-                                Console.SetCursorPosition(51, 27);
-                                Console.WriteLine("법사를 선택하셨습니다");
-                                Thread.Sleep(1000);
                                 return "법사";
                             }
                             Console.SetCursorPosition(50, Console.CursorTop);
@@ -145,7 +125,15 @@ namespace FirstProject
                             Console.Write("▶");
                             break;
                         }
-                    case ConsoleKey.Escape:
+                    case ConsoleKey.RightArrow:
+                        {
+                            break;
+                        }
+                    case ConsoleKey.LeftArrow:
+                        {
+                            break;
+                        }
+                    case ConsoleKey.Q:
                         {
                             return "타이틀로";
                         }
@@ -161,9 +149,9 @@ namespace FirstProject
         }
         void Clear()
         {
-            for (int y = 0; y < 29; y++)
+            for (int y = 1; y < 28; y++)
             {
-                for (int x = 0; x < 49; x++)
+                for (int x = 1; x < 48; x++)
                 {
                     Console.SetCursorPosition(x + 37, y);
                     Console.WriteLine(" ");

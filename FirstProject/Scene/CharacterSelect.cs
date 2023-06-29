@@ -11,7 +11,7 @@ namespace FirstProject
     {
         int chrNumber = 0;
         // 커서 위치 (37,0)부터 시작 y 마지막 좌표 28
-        public void Print(ref string chr)
+        public void Do(ref string chr)
         {
             Clear();
 
@@ -35,12 +35,6 @@ namespace FirstProject
                 chrNumber = 3;
             }
             System.ConsoleKeyInfo playerInput;
-            Console.SetCursorPosition(59, 1);
-            Console.Write(chr);
-            Console.SetCursorPosition(38, 27);
-            Console.Write("◀");
-            Console.SetCursorPosition(84, 27);
-            Console.Write("▶");
             for (int y = 0; y < 29; y++)
             {
                 for (int x = 0; x < 49; x++)
@@ -81,6 +75,12 @@ namespace FirstProject
                     Console.SetCursorPosition(38, y);
                     Console.Write("                                             ");
                 }
+                Console.SetCursorPosition(59, 1);
+                Console.Write(chr);
+                Console.SetCursorPosition(40, 27);
+                Console.Write("◀");
+                Console.SetCursorPosition(82, 27);
+                Console.Write("▶");
                 Print();
                 playerInput = Console.ReadKey();
                 switch (playerInput.Key)
@@ -164,7 +164,7 @@ namespace FirstProject
                             }
                             break;
                         }
-                    case ConsoleKey.Escape:
+                    case ConsoleKey.Q:
                         {
                             chr = "재선택";
                             return;
@@ -182,9 +182,9 @@ namespace FirstProject
 
         void Clear()
         {
-            for (int y = 0; y < 29; y++)
+            for (int y = 1; y < 28; y++)
             {
-                for (int x = 0; x < 49; x++)
+                for (int x = 1; x < 48; x++)
                 {
                     Console.SetCursorPosition(x + 37, y);
                     Console.WriteLine(" ");
@@ -234,6 +234,8 @@ namespace FirstProject
                         Console.Write("철갑 Lv.3");
                         Console.SetCursorPosition(47, 23);
                         Console.Write("철갑은 받는 피해를 줄여줍니다");
+                        Console.SetCursorPosition(40, 27);
+                        Console.Write(" ");
                         break;
                     }
                 case 1:
@@ -354,6 +356,8 @@ namespace FirstProject
                         Console.Write("맹독 Lv.3");
                         Console.SetCursorPosition(42, 23);
                         Console.Write("맹독은 전투 중 적에게 지속피해를 줍니다");
+                        Console.SetCursorPosition(82, 27);
+                        Console.Write(" ");
                         break;
                     }
             }

@@ -14,6 +14,12 @@ namespace FirstProject
         protected int atk;
         protected int cri;
         protected int avoid;
+        protected string type;
+
+        public string Get_Type()
+        {
+            return type;
+        }
 
         public string Get_Name()
         {

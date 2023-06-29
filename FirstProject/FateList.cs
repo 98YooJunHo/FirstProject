@@ -10,7 +10,7 @@ namespace FirstProject
     public class FateList
     {
         public List<Fate> list = new List<Fate>();
-        public FateList() 
+        public FateList()
         {
             Fate fate = new Fate();
             Fate fate1 = new Fate();

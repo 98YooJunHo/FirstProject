@@ -30,7 +30,7 @@ namespace FirstProject
             // while 시작
             while (true)
             {
-                if(chr.Get_Hp() == 0)
+                if (chr.Get_Hp() == 0)
                 {
                     return "타이틀로";
                 }
@@ -186,7 +186,7 @@ namespace FirstProject
                             {
                                 boss = new StarveTree(1);
                             }
-                            Print_BossInfo(boss); 
+                            Print_BossInfo(boss);
                             System.ConsoleKeyInfo playerInput1 = new ConsoleKeyInfo();
                             while (playerInput1.Key != ConsoleKey.Enter)
                             {
@@ -254,7 +254,7 @@ namespace FirstProject
                         }
                     case ConsoleKey.LeftArrow:
                         {
-                            if(_case == 5)
+                            if (_case == 5)
                             {
                                 if (fatePos != 0)
                                 {
@@ -282,7 +282,7 @@ namespace FirstProject
                         }
                     case ConsoleKey.R:
                         {
-                            if(_case == 5 && fateRoll == 1)
+                            if (_case == 5 && fateRoll == 1)
                             {
                                 fateRoll -= 1;
                                 fates = Run.Choice_Fate();
@@ -328,25 +328,28 @@ namespace FirstProject
                                 // 적 조우
                                 case 3:
                                     {
-                                        if(battlePos == 0)
+                                        if (battlePos == 0)
                                         {
                                             int who = random.Next(3);
                                             MonsterBase mob = null;
-                                            switch (who)
+                                            if (act == 1)
                                             {
-                                                case 0:
-                                                    mob = new UndeadArcher(1);
-                                                    break;
-                                                case 1:
-                                                    mob = new UndeadKnight(1);
-                                                    break;
-                                                case 2:
-                                                    mob = new UndeadShield(1);
-                                                    break;
+                                                switch (who)
+                                                {
+                                                    case 0:
+                                                        mob = new UndeadArcher(1);
+                                                        break;
+                                                    case 1:
+                                                        mob = new UndeadKnight(1);
+                                                        break;
+                                                    case 2:
+                                                        mob = new UndeadShield(1);
+                                                        break;
+                                                }
                                             }
                                             BattleScene battle = new BattleScene();
                                             condition = battle.Do(chr, mob);
-                                            if(condition == "배틀도중사망")
+                                            if (condition == "배틀도중사망")
                                             {
                                                 return "타이틀로";
                                             }
@@ -362,11 +365,11 @@ namespace FirstProject
                                         if (eventPos == 0)
                                         {
                                             int Istoxic = random.Next(10);
-                                            if(Istoxic < 2)
+                                            if (Istoxic < 2)
                                             {
                                                 chr.Set_Hp(chr.Get_Hp() - chr.Get_MaxHp() / 10);
                                                 Clear_Info();
-                                                Console.SetCursorPosition(56,15);
+                                                Console.SetCursorPosition(56, 15);
                                                 Console.Write("썩은샘이였다");
                                                 Thread.Sleep(1000);
                                                 Console.SetCursorPosition(56, 15);
@@ -374,7 +377,7 @@ namespace FirstProject
                                             }
                                             else
                                             {
-                                                chr.Set_Hp(chr.Get_Hp() + (chr.Get_MaxHp()/10)*2);
+                                                chr.Set_Hp(chr.Get_Hp() + (chr.Get_MaxHp() / 10) * 2);
                                                 Clear_Info();
                                                 Console.SetCursorPosition(56, 15);
                                                 Console.Write("맑은샘이였다");
@@ -414,7 +417,7 @@ namespace FirstProject
                                         }
                                         else if (campPos == 1)
                                         {
-                                            foreach(Skill skill in chr.skills)
+                                            foreach (Skill skill in chr.skills)
                                             {
                                                 skill.count = skill.fullCount;
                                             }
@@ -435,7 +438,6 @@ namespace FirstProject
                                     {
                                         if (battlePos == 0)
                                         {
-                                            int who = random.Next(3);
                                             MonsterBase mob = new StarveTree(1);
                                             BattleScene battle = new BattleScene();
                                             battle.Do(chr, mob);

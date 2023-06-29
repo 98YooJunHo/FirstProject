@@ -44,30 +44,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ability.cs" />
-    <Compile Include="Archer.cs" />
-    <Compile Include="BattleScene.cs" />
-    <Compile Include="CharacterSelect.cs" />
-    <Compile Include="CharacterBase.cs" />
+    <Compile Include="Character\Archer.cs" />
+    <Compile Include="Scene\BattleScene.cs" />
+    <Compile Include="Scene\CharacterSelect.cs" />
+    <Compile Include="Character\CharacterBase.cs" />
     <Compile Include="Expedition.cs" />
     <Compile Include="Fate.cs" />
     <Compile Include="FateList.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemList.cs" />
-    <Compile Include="Knight.cs" />
-    <Compile Include="Mage.cs" />
-    <Compile Include="MainScene.cs" />
-    <Compile Include="MonsterBase.cs" />
+    <Compile Include="Character\Knight.cs" />
+    <Compile Include="Character\Mage.cs" />
+    <Compile Include="Scene\MainScene.cs" />
+    <Compile Include="Act\MonsterBase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectScene.cs" />
+    <Compile Include="Scene\SelectScene.cs" />
     <Compile Include="Skill.cs" />
-    <Compile Include="StarveTree.cs" />
-    <Compile Include="Thief.cs" />
-    <Compile Include="TitleScene.cs" />
-    <Compile Include="UndeadArcher.cs" />
-    <Compile Include="UndeadKnight.cs" />
-    <Compile Include="UndeadShield.cs" />
+    <Compile Include="Act\Act1\StarveTree.cs" />
+    <Compile Include="Character\Thief.cs" />
+    <Compile Include="Scene\TitleScene.cs" />
+    <Compile Include="Act\Act1\UndeadArcher.cs" />
+    <Compile Include="Act\Act1\UndeadKnight.cs" />
+    <Compile Include="Act\Act1\UndeadShield.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

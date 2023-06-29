@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace FirstProject
 {
@@ -23,6 +24,48 @@ namespace FirstProject
                 TitleScene Title = new TitleScene();
                 Title.Print();
                 playerInput = Console.ReadKey();
+                if (playerInput.Key == ConsoleKey.Q)
+                {
+                    for (int y = 0; y < 29; y++)
+                    {
+                        for (int x = 0; x < 49; x++)
+                        {
+                            Console.SetCursorPosition(x + 37, y);
+                            if (x == 0 && y == 0)
+                            {
+                                Console.Write("┌");
+                            }
+                            else if (x == 48 && y == 0)
+                            {
+                                Console.Write("┐");
+                            }
+                            else if (x == 0 && y == 28)
+                            {
+                                Console.Write("└");
+                            }
+                            else if (x == 48 && y == 28)
+                            {
+                                Console.Write("┘");
+                            }
+                            else if (y == 0 || y == 28)
+                            {
+                                Console.Write("─");
+                            }
+                            else if (x == 0 || x == 48)
+                            {
+                                Console.Write("│");
+                            }
+                            else
+                            { /* empty */ }
+                        }
+                    }
+                    Clear();
+                    Console.SetCursorPosition(53, 14);
+                    Console.Write("게임을 종료 합니다");
+                    Console.SetCursorPosition(42, 27);
+                    return;
+                }
+
                 if (playerInput.Key != ConsoleKey.Enter)
                 {
                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
@@ -33,7 +76,7 @@ namespace FirstProject
                 while (true)
                 {
                     SelectScene Select = new SelectScene();
-                    chr = Select.Print();
+                    chr = Select.Do();
 
                     if (chr == "타이틀로")
                     {
@@ -43,7 +86,7 @@ namespace FirstProject
                     if (chr != null)
                     {
                         CharacterSelect cha = new CharacterSelect();
-                        cha.Print(ref chr);
+                        cha.Do(ref chr);
 
                         if (chr == "재선택")
                         {
@@ -75,7 +118,6 @@ namespace FirstProject
                         }
                     }
                 }
-
                 if (chr == "타이틀로")
                 {
                     continue;
@@ -85,8 +127,45 @@ namespace FirstProject
                 {
                     MainScene main = new MainScene();
                     chr = main.Do(ref player, ref count, ref act);
-                    if (chr == "종료") 
+                    if (chr == "종료")
                     {
+                        for (int y = 0; y < 29; y++)
+                        {
+                            for (int x = 0; x < 49; x++)
+                            {
+                                Console.SetCursorPosition(x + 37, y);
+                                if (x == 0 && y == 0)
+                                {
+                                    Console.Write("┌");
+                                }
+                                else if (x == 48 && y == 0)
+                                {
+                                    Console.Write("┐");
+                                }
+                                else if (x == 0 && y == 28)
+                                {
+                                    Console.Write("└");
+                                }
+                                else if (x == 48 && y == 28)
+                                {
+                                    Console.Write("┘");
+                                }
+                                else if (y == 0 || y == 28)
+                                {
+                                    Console.Write("─");
+                                }
+                                else if (x == 0 || x == 48)
+                                {
+                                    Console.Write("│");
+                                }
+                                else
+                                { /* empty */ }
+                            }
+                        }
+                        Clear();
+                        Console.SetCursorPosition(53, 14);
+                        Console.Write("게임을 종료 합니다");
+                        Console.SetCursorPosition(42, 27);
                         return;
                     }
 
@@ -97,6 +176,18 @@ namespace FirstProject
                     break;
                 }
                 continue;
+            }
+        }
+
+        void Clear()
+        {
+            for (int y = 1; y < 28; y++)
+            {
+                for (int x = 1; x < 48; x++)
+                {
+                    Console.SetCursorPosition(x + 37, y);
+                    Console.WriteLine(" ");
+                }
             }
         }
     }

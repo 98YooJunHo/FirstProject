@@ -89,9 +89,9 @@ namespace FirstProject
         }
         void Clear()
         {
-            for (int y = 0; y < 29; y++)
+            for (int y = 1; y < 28; y++)
             {
-                for (int x = 0; x < 49; x++)
+                for (int x = 1; x < 48; x++)
                 {
                     Console.SetCursorPosition(x + 37, y);
                     Console.WriteLine(" ");
