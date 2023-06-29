@@ -389,6 +389,7 @@ namespace FirstProject
                                         }
                                         else if (eventPos == 1)
                                         {
+                                            eventPos = 0;
                                             _case = 0;
                                             count += 1;
                                             break;

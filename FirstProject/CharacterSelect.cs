@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,6 +76,12 @@ namespace FirstProject
             }
             while (true)
             {
+                for (int y = 5; y < 24; y++)
+                {
+                    Console.SetCursorPosition(38, y);
+                    Console.Write("                                       ");
+                }
+                Print();
                 playerInput = Console.ReadKey();
                 switch (playerInput.Key)
                 {
@@ -167,6 +174,173 @@ namespace FirstProject
                     Console.SetCursorPosition(x + 37, y);
                     Console.WriteLine(" ");
                 }
+            }
+        }
+
+        void Print()
+        {
+            switch (chrNumber)
+            {
+                case 0:
+                    {
+                        Console.SetCursorPosition(45, 5);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 6);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣴⣶⣿⣿⣿⣿⣶⣦⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 7);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 8);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⡿⠿⠟⠛⠉⠉⠉⠉⠛⠻⠿⢿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 9);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠘⠋⠉⢀⣀⣠⣤⣶⣾⣿⣿⣷⣶⣤⣄⣀⡀⠉⠙⠃⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 10);
+                        Console.Write("⠀⠀⠀⠀⠀⣤⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣦⣤⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 11);
+                        Console.Write("⠀⠀⠀⠀⠀⣿⣿⣿⣿⡿⢿⣿⣿⠋⠙⣿⣿⠋⠙⣿⣿⡿⢿⣿⣿⣿⣿⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 12);
+                        Console.Write("⠀⠀⠀⠀⠀⣿⣿⣿⣿⠀⠀⣿⣿⠀⠀⣿⣿⠀⠀⣿⣿⠀⠀⣿⣿⣿⣿⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 13);
+                        Console.Write("⠀⠀⠀⠀⠀⣿⣿⣿⣿⠀⠀⣿⣿⠀⠀⣿⣿⠀⠀⣿⣿⠀⠀⣿⣿⣿⣿⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 14);
+                        Console.Write("⠀⠀⠀⠀⠀⣿⣿⣿⣿⣦⣼⣿⣿⠀⠀⣿⣿⠀⠀⣿⣿⣧⣴⣿⣿⣿⣿⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 15);
+                        Console.Write("⠀⠀⠀⠀⠀⠛⠿⣿⣿⣿⣿⣿⣿⣷⣾⣿⣿⣷⣾⣿⣿⣿⣿⣿⣿⠿⠛⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 16);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 17);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⣠⣶⣦⣄⡀⠉⠛⠿⣿⣿⠿⠛⠉⢀⣠⣴⣶⣄⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 18);
+                        Console.Write("⠀⠀⠀⠀⠀⣤⣾⣿⣿⣿⣿⣿⣷⣦⣄⣀⣀⣠⣴⣾⣿⣿⣿⣿⣿⣷⣤⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 19);
+                        Console.Write("⠀⠀⠀⠀⠀⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠛⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 20);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠛⠿⢿⣿⣿⡿⠿⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(56, 22);
+                        Console.Write("철갑 Lv.3");
+                        Console.SetCursorPosition(47, 23);
+                        Console.Write("철갑은 받는 피해를 줄여줍니다");
+                        break;
+                    }
+                case 1:
+                    {
+                        Console.SetCursorPosition(43, 5);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⣠⣤⣄⠀");
+                        Console.SetCursorPosition(43, 6);
+                        Console.Write("⠀⠀⠀⠀⠀⠸⣿⣿⠟⠀⠀");
+                        Console.SetCursorPosition(43, 7);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠈⠁⠰⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⡤⠀⠀");
+                        Console.SetCursorPosition(43, 8);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣦⡀⠀⠀⣠⣴⣿⡿⠿⠿⠁⠀");
+                        Console.SetCursorPosition(43, 9);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⠗⣠⣶⡿⠛⣡⣄⠀⠀⠀");
+                        Console.SetCursorPosition(43, 10);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⠋⣠⡘⢿⣿⣷⣄⠀⠀");
+                        Console.SetCursorPosition(43, 11);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⠟⠠⣾⣿⣿⣦⠙⣿⣿⣆⠀⠀");
+                        Console.SetCursorPosition(43, 12);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⢋⣴⣤⡈⢿⣿⣿⣷⡌⢿⣿⣷⡀⠀");
+                        Console.SetCursorPosition(43, 13);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⣿⣿⡇⠈⠻⣿⣿⣦⣈⠻⢿⣿⣄⠻⣿⣿⣆⠀");
+                        Console.SetCursorPosition(43, 14);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⡿⠿⠃⠀⠀⠈⠙⢿⣿⣷⣦⣉⠛⠄⠹⣿⣿⣧⡀");
+                        Console.SetCursorPosition(43, 15);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣷⣤⣀⣹⣿⣿⣷⡄⠀");
+                        Console.SetCursorPosition(43, 16);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⢿⣿⣿⣿⣿⣿⣿⣿⡀⠀");
+                        Console.SetCursorPosition(43, 17);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⡄⠀");
+                        Console.SetCursorPosition(43, 18);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⡄⠀");
+                        Console.SetCursorPosition(43, 19);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⣿⡄⠀");
+                        Console.SetCursorPosition(43, 20);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠀");
+                        Console.SetCursorPosition(56, 22);
+                        Console.Write("추가 예정");
+                        //Console.SetCursorPosition(47, 23);
+                        //Console.Write("철갑은 받는 피해를 줄여줍니다");
+                        break;
+                    }
+                case 2:
+                    {
+                        Console.SetCursorPosition(45, 5);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 6);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 7);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡾⠙⠿⣿⣶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 8);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡞⠀⠀⠀⠀⠙⠻⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 9);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 10);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⣠⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 11);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⣰⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 12);
+                        Console.Write("⠀⠀⠀⠀⠀⠈⣻⣿⣿⣿⣦⣄⣄⣠⣠⣠⣀⣄⣼⣿⣷⣨⣻⣶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 13);
+                        Console.Write("⠀⠀⠀⠀⠀⠠⠽⣿⠿⠿⠟⠉⠉⠉⠉⠉⠉⠉⢹⣿⡿⢉⡽⠿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 14);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠸⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠺⣿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 15);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠘⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 16);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣧⡀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 17);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢷⠀⠀⠀⠀⣠⣴⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 18);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⣠⣶⣿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 19);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(45, 20);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                        Console.SetCursorPosition(56, 22);
+                        Console.Write("추가 예정");
+                        //Console.SetCursorPosition(47, 23);
+                        //Console.Write("철갑은 받는 피해를 줄여줍니다");
+                        break;
+                    }
+                case 3:
+                    {
+                        Console.SetCursorPosition(38, 5);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣶⣶⣶⣦⣤⣄⡀⠀⠀⠀");
+                        Console.SetCursorPosition(38, 6);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀");
+                        Console.SetCursorPosition(38, 7);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠛⠛⠛⠛⠛⠃⠀⠀");
+                        Console.SetCursorPosition(38, 8);
+                        Console.Write("⠀⠀⠀⠀   ⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀");
+                        Console.SetCursorPosition(38, 9);
+                        Console.Write("⠀⠀   ⢠⣾⣿⣿⣿⣿⣶⣤⣄⡀⠀⠀⠀⠀⠰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀");
+                        Console.SetCursorPosition(38, 10);
+                        Console.Write("⠀⠀   ⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠆⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀");
+                        Console.SetCursorPosition(38, 11);
+                        Console.Write("⠀   ⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⠉⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⠀");
+                        Console.SetCursorPosition(38, 12);
+                        Console.Write("⠀   ⠀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠿⠿⠿⠀");
+                        Console.SetCursorPosition(38, 13);
+                        Console.Write("⠀⠀⠀   ⠈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀");
+                        Console.SetCursorPosition(38, 14);
+                        Console.Write("⠀⠀⠀   ⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣄⠀⠀⠀");
+                        Console.SetCursorPosition(38, 15);
+                        Console.Write("⠀⠀⠀⠀⠀   ⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣄⡀⠀⠀⠀⠀⢰⣿⣿⣷⣤⡀");
+                        Console.SetCursorPosition(38, 16);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣾⣿⣿⣿⣿⣿⣷⣄⡀");
+                        Console.SetCursorPosition(38, 17);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠉⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀");
+                        Console.SetCursorPosition(38, 18);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠉⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀");
+                        Console.SetCursorPosition(38, 19);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠉⠛⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀ ");
+                        Console.SetCursorPosition(38, 20);
+                        Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠈⠙⠛⠛⠛⠿⠿⠿⠿⠛⠛⠋⠀⠀⠀⠀");
+                        Console.SetCursorPosition(56, 22);
+                        Console.Write("추가 예정");
+                        //Console.SetCursorPosition(47, 23);
+                        //Console.Write("철갑은 받는 피해를 줄여줍니다");
+                        break;
+                    }
             }
         }
     }

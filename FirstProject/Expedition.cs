@@ -94,7 +94,7 @@ namespace FirstProject
                     {
                         Console.SetCursorPosition(62, 7);
                         Console.Write("새로고침 가능 횟수 :" + roll + "회");
-                        Console.SetCursorPosition(53, 8);
+                        Console.SetCursorPosition(53, 9);
                         Console.Write("운명을 선택하세요");
                         Console.SetCursorPosition(46, 13);
                         Console.Write(fates_[0].name);

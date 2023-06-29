@@ -13,8 +13,8 @@ namespace FirstProject
         {
             Clear();
             System.ConsoleKeyInfo playerInput;
-            Console.SetCursorPosition(50, 1);
-            Console.Write("탑 캐릭터 선택 씬 입니다");
+            Console.SetCursorPosition(56, 1);
+            Console.Write("캐릭터 선택");
             Console.SetCursorPosition(59, 3);
             Console.Write("기사");
             Console.SetCursorPosition(59, 5);
@@ -60,8 +60,10 @@ namespace FirstProject
                     { /* empty */ }
                 }
             }
-            Console.SetCursorPosition(43, 3);
+            Console.SetCursorPosition(50, 3);
             Console.Write("▶");
+            Console.SetCursorPosition(71, 3);
+            Console.Write("◀");
             while (true)
             {
                 playerInput = Console.ReadKey();
@@ -73,10 +75,14 @@ namespace FirstProject
                             {
                                 break;
                             }
-                            Console.SetCursorPosition(43, Console.CursorTop);
+                            Console.SetCursorPosition(50, Console.CursorTop);
                             Console.Write(" ");
-                            Console.SetCursorPosition(43, Console.CursorTop -= 2);
+                            Console.SetCursorPosition(71, Console.CursorTop);
+                            Console.Write(" ");
+                            Console.SetCursorPosition(50, Console.CursorTop -= 2);
                             Console.Write("▶");
+                            Console.SetCursorPosition(71, Console.CursorTop);
+                            Console.Write("◀");
                             break;
                         }
                     case ConsoleKey.DownArrow:
@@ -85,10 +91,14 @@ namespace FirstProject
                             {
                                 break;
                             }
-                            Console.SetCursorPosition(43, Console.CursorTop);
+                            Console.SetCursorPosition(50, Console.CursorTop);
                             Console.Write(" ");
-                            Console.SetCursorPosition(43, Console.CursorTop += 2);
+                            Console.SetCursorPosition(71, Console.CursorTop);
+                            Console.Write(" ");
+                            Console.SetCursorPosition(50, Console.CursorTop += 2);
                             Console.Write("▶");
+                            Console.SetCursorPosition(71, Console.CursorTop);
+                            Console.Write("◀");
                             break;
                         }
                     case ConsoleKey.Enter:
@@ -102,9 +112,9 @@ namespace FirstProject
                                 Thread.Sleep(1000);
                                 return "기사";
                             }
-                            Console.SetCursorPosition(43, Console.CursorTop);
+                            Console.SetCursorPosition(50, Console.CursorTop);
                             Console.Write(" ");
-                            Console.SetCursorPosition(43, Console.CursorTop);
+                            Console.SetCursorPosition(50, Console.CursorTop);
                             Console.Write("▶");
                             break;
                         }

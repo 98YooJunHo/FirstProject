@@ -12,8 +12,6 @@ namespace FirstProject
         public void Print()
         {
             Clear();
-            Console.SetCursorPosition(49, 1);
-            Console.Write("겨울의 탑 타이틀 씬 입니다");
             Console.SetCursorPosition(52, 27);
             Console.Write("아무키나 입력 하세요");
             for (int y = 0; y < 29; y++)
@@ -49,6 +47,45 @@ namespace FirstProject
                     { /* empty */ }
                 }
             }
+
+            Console.SetCursorPosition(38, 1);
+            Console.Write(" _____");
+            Console.SetCursorPosition(38, 2);
+            Console.Write("|_   _|");
+            Console.SetCursorPosition(38, 3);
+            Console.Write("  | |    ___  __      __  ___  _ __");
+            Console.SetCursorPosition(38, 4);
+            Console.Write("  | |   / _ \\ \\ \\ /\\ / / / _ \\| '__|");
+            Console.SetCursorPosition(38, 5);
+            Console.Write("  | |  | (_) | \\ V  V / |  __/| |");
+            Console.SetCursorPosition(38, 6);
+            Console.Write("  \\_/   \\___/   \\_/\\_/   \\___||_|");
+
+            Console.SetCursorPosition(48, 7);
+            Console.Write(" _____   __");
+            Console.SetCursorPosition(48, 8);
+            Console.Write("|  _  | / _|");
+            Console.SetCursorPosition(48, 9);
+            Console.Write("| | | || |_");
+            Console.SetCursorPosition(48, 10);
+            Console.Write("| | | ||  _|");
+            Console.SetCursorPosition(48, 11);
+            Console.Write("\\ \\_/ /| |");
+            Console.SetCursorPosition(48, 12);
+            Console.Write(" \\___/ |_|");
+
+            Console.SetCursorPosition(53, 13);
+            Console.Write("______               _    _");
+            Console.SetCursorPosition(53, 14);
+            Console.Write("|  _  \\             | |  | |");
+            Console.SetCursorPosition(53, 15);
+            Console.Write("| | | |  ___   __ _ | |_ | |__");
+            Console.SetCursorPosition(53, 16);
+            Console.Write("| | | | / _ \\ / _` || __|| '_ \\");
+            Console.SetCursorPosition(53, 17);
+            Console.Write("| |/ / |  __/| (_| || |_ | | | |");
+            Console.SetCursorPosition(53, 18);
+            Console.Write("|___/   \\___| \\__,_| \\__||_| |_|");
         }
         void Clear()
         {
@@ -61,5 +98,6 @@ namespace FirstProject
                 }
             }
         }
+
     }
 }
