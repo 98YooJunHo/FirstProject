@@ -26,6 +26,10 @@ namespace FirstProject
         public void Set_Hp(int cHp)
         {
             hp = cHp;
+            if(hp < 0)
+            {
+                hp = 0;
+            }
         }
         public int Get_MaxHp()
         {

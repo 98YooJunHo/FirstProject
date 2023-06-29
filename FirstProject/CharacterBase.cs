@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,27 +105,37 @@ namespace FirstProject
         // 스탯 관련 끝
 
         // 스킬 관련
-        public Skill Get_Skills(int i)
+        public Skill Get_Skill(int i)
         {
             return skills[i];
         }
-        public void Add_Skill(string name, int cooltime)
+        public void Add_Skill(string name, int count, int fullCount)
         {
-            Skill tempSkill = new Skill();
-            tempSkill.name = name;
-            tempSkill.cooltime = cooltime;
+            int same = 0;
+            int index = 0;
             for (int i = 0; i < skills.Count; i++)
             {
-                if (skills[i].name == tempSkill.name)
+                if (skills[i].name == name)
                 {
-                    if (skills[i].cooltime != 0)
-                    {
-                        skills[i].cooltime -= 1;
-                        return;
-                    }
+                    same = 1;
+                    index = i;
+                    break;
                 }
+            }
 
+            if (same == 0)
+            {
+                Skill tempSkill = new Skill();
+                tempSkill.Init(name, count, fullCount);
                 skills.Add(tempSkill);
+                return;
+            }
+
+            if (same == 1)
+            {
+                skills[index].fullCount += 5;
+                skills[index].count = skills[index].fullCount;
+                return;
             }
         }
         public int Get_Skills_Length()

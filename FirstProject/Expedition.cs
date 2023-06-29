@@ -50,7 +50,7 @@ namespace FirstProject
             return 0;
         }
 
-        public void Print(List<Fate> fates_, int _case)
+        public void Print(List<Fate> fates_, int _case, int roll)
         {
             switch(_case)
             {
@@ -92,6 +92,8 @@ namespace FirstProject
                     }
                 case 5:
                     {
+                        Console.SetCursorPosition(62, 7);
+                        Console.Write("새로고침 가능 횟수 :" + roll + "회");
                         Console.SetCursorPosition(53, 8);
                         Console.Write("운명을 선택하세요");
                         Console.SetCursorPosition(46, 13);
@@ -115,7 +117,7 @@ namespace FirstProject
             }
         }
 
-        public List<Fate> Choice_Fate(List<Fate> fates_,int cas)
+        public List<Fate> Choice_Fate()
         {
             FateList fates = new FateList();
             List<Fate> selectedFates = new List<Fate>();
@@ -123,8 +125,7 @@ namespace FirstProject
             for (int i = 0; i < 1000; i++)
             {
                 int randomIndex = random.Next(fates.list.Count-1);
-                Fate temp = new Fate();
-                temp = fates.list[randomIndex];
+                Fate temp = fates.list[randomIndex];
                 fates.list[randomIndex] = fates.list[randomIndex+1];
                 fates.list[randomIndex + 1] = temp;
             }

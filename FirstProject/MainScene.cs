@@ -20,6 +20,7 @@ namespace FirstProject
             Expedition Run = new Expedition();
             List<Fate> fates = new List<Fate>();
             int _case = 0;
+            int fateRoll = 1;
             int fatePos = 0;
             int eventPos = 0;
             int battlePos = 0;
@@ -116,10 +117,10 @@ namespace FirstProject
 
                 if ((_case == 5 && fates.Count == 0))
                 {
-                    fates = Run.Choice_Fate(fates, _case);
+                    fates = Run.Choice_Fate();
                 }
 
-                Run.Print(fates, _case);
+                Run.Print(fates, _case, fateRoll);
                 if (_case == 5)
                 {
                     Console.SetCursorPosition(49 + fatePos * 13, 15);
@@ -279,6 +280,18 @@ namespace FirstProject
                             }
                             break;
                         }
+                    case ConsoleKey.R:
+                        {
+                            if(_case == 5 && fateRoll == 1)
+                            {
+                                fateRoll -= 1;
+                                fates = Run.Choice_Fate();
+                            }
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                            Console.Write(" ");
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                            break;
+                        }
                     case ConsoleKey.Enter:
                         {
                             Clear_Info();
@@ -400,7 +413,10 @@ namespace FirstProject
                                         }
                                         else if (campPos == 1)
                                         {
-                                            chr.Set_Hp(chr.Get_Hp() + (chr.Get_MaxHp() / 10) * 5);
+                                            foreach(Skill skill in chr.skills)
+                                            {
+                                                skill.count = skill.fullCount;
+                                            }
                                             Clear_Info();
                                             Console.SetCursorPosition(55, 15);
                                             Console.Write("잘쉬고 갑니다");
@@ -530,20 +546,24 @@ namespace FirstProject
 
             for (int i = 0; i < chr.Get_Ability_Length(); i++)
             {
-                Console.SetCursorPosition(40, 9 + i);
                 Ability tempAbility = chr.Get_Ability(i);
+                Console.SetCursorPosition(40, 9 + i);
                 Console.Write(tempAbility.name + "Lv:" + tempAbility.lvl);
             }
 
             for (int i = 0; i < chr.Get_Skills_Length(); i++)
             {
-                Console.SetCursorPosition(43 + (i * 5), 20);
-                Skill tempSkill = chr.Get_Skills(i);
+                Skill tempSkill = chr.Get_Skill(i);
+                Console.SetCursorPosition(41 + (i * 9), 20);
                 Console.Write(tempSkill.name);
-                Console.SetCursorPosition(44 + (i * 5), 21);
-                if (tempSkill.cooltime != 0)
+                Console.SetCursorPosition(42 + (i * 9), 21);
+                if (tempSkill.count != -1)
                 {
-                    Console.Write(tempSkill.cooltime);
+                    Console.Write(tempSkill.count);
+                }
+                else
+                {
+                    Console.Write("∞");
                 }
             }
 

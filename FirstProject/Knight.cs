@@ -20,9 +20,11 @@ namespace FirstProject
 
             skills = new List<Skill>();
             Skill normalAttack = new Skill();
-            normalAttack.name = "평타";
-            normalAttack.cooltime = 0;
+            Skill normalBlock = new Skill();
+            normalAttack.Init("평타", -1, -1);
+            normalBlock.Init("방어", 30, 30);
             skills.Add(normalAttack);
+            skills.Add(normalBlock);
 
             abilities = new List<Ability>();
             Ability ironPlate = new Ability();

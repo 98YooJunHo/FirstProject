@@ -10,9 +10,9 @@ namespace FirstProject
     {
         static void Main(string[] args)
         {
-            //Console.CursorVisible = false;
-            //Game game = new Game();
-            //game.Start();
+            Console.CursorVisible = false;
+            Game game = new Game();
+            game.Start();
         }
     }
 }

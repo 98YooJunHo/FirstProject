@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Threading;
 
 namespace FirstProject
 {
@@ -17,6 +18,7 @@ namespace FirstProject
             System.ConsoleKeyInfo rewardInput;
             int count = 1;
             int reduction = 0;
+            int shield = 0;
             int poison = 0;
             int getPoison = 0;
             int inBattleAtk = chr.Get_Atk();
@@ -166,6 +168,7 @@ namespace FirstProject
                 }
             }
 
+            // 능력 체크
             foreach(Ability ability in chr.abilities)
             {
                 if (ability.name == "맹독")
@@ -229,16 +232,14 @@ namespace FirstProject
                 }
             }
 
+            Console.SetCursorPosition(59, 9);
+            Console.Write("          ");
+            Console.SetCursorPosition(59, 9);
+            Console.Write(mob.Get_Hp() + "/" + mob.Get_MaxHp());
+
             int pos = 0;
             while (true)
             {
-                if (getPoison != 0)
-                {
-                    Console.SetCursorPosition(80, 6);
-                    Console.Write("중독");
-                    Console.SetCursorPosition(82, 7);
-                    Console.Write(getPoison);
-                }
                 Console.SetCursorPosition(38, 20);
                 Console.Write("피해감소");
                 Console.SetCursorPosition(41, 21);
@@ -254,10 +255,6 @@ namespace FirstProject
                 Console.Write("진행 중인 턴:" + count);
                 Console.SetCursorPosition(55, 5);
                 Console.Write(mob.Get_Name());
-                Console.SetCursorPosition(59, 9);
-                Console.Write("          ");
-                Console.SetCursorPosition(59, 9);
-                Console.Write(mob.Get_Hp() + "/" + mob.Get_MaxHp());
                 Console.SetCursorPosition(60, 19);
                 Console.Write(chr.Get_Name());
                 Console.SetCursorPosition(58, 23);
@@ -269,13 +266,17 @@ namespace FirstProject
                 Console.Write("적이 공격을 준비합니다");
                 for (int i = 0; i < chr.Get_Skills_Length(); i++)
                 {
+                    Skill tempSkill = chr.Get_Skill(i);
                     Console.SetCursorPosition(41 + (i * 9), 25);
-                    Skill tempSkill = chr.Get_Skills(i);
                     Console.Write(tempSkill.name);
                     Console.SetCursorPosition(42 + (i * 9), 26);
-                    if (tempSkill.cooltime != 0)
+                    if (tempSkill.count != -1)
                     {
-                        Console.Write(tempSkill.cooltime);
+                        Console.Write(tempSkill.count);
+                    }
+                    else
+                    {
+                        Console.Write("∞");
                     }
                 }
                 Console.SetCursorPosition(43 + pos * 9, 27);
@@ -295,7 +296,7 @@ namespace FirstProject
                         }
                     case ConsoleKey.RightArrow:
                         {
-                            if (pos != 4)
+                            if (pos != chr.abilities.Count - 1)
                             {
                                 Console.SetCursorPosition(43 + pos * 9, 27);
                                 Console.Write(" ");
@@ -305,6 +306,83 @@ namespace FirstProject
                         }
                     case ConsoleKey.Enter:
                         {
+                            // 전투 진행상황 초기화
+                            #region
+                            Console.SetCursorPosition(38, 11);
+                            Console.Write("                                          ");
+                            Console.SetCursorPosition(38, 12);
+                            Console.Write("                                          ");
+                            Console.SetCursorPosition(38, 13);
+                            Console.Write("                                          ");
+                            Console.SetCursorPosition(38, 14);
+                            Console.Write("                                          ");
+                            Console.SetCursorPosition(38, 15);
+                            Console.Write("                                          ");
+                            #endregion
+                            switch (pos)
+                            {
+                                case 0:
+                                    {
+                                        if (mAvoid < mob.Get_Avoid())
+                                        {
+                                            Console.SetCursorPosition(38, 11);
+                                            Console.Write("(적 회피)");
+                                        }
+                                        else if (pCri < inBattleCri)
+                                        {
+                                            Console.SetCursorPosition(38, 11);
+                                            Console.Write("내 공격 " + inBattleAtk * 16 / 10 + "의 피해(크리티컬)");
+                                            mob.Set_Hp(mob.Get_Hp() - inBattleAtk * 16 / 10);
+                                            getPoison += poison;
+
+                                            if (getPoison != 0)
+                                            {
+                                                Console.SetCursorPosition(80, 6);
+                                                Console.Write("중독");
+                                                Console.SetCursorPosition(81, 7);
+                                                Console.Write(getPoison);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.SetCursorPosition(38, 11);
+                                            Console.Write("내 공격 " + inBattleAtk + "의 피해");
+                                            mob.Set_Hp(mob.Get_Hp() - inBattleAtk);
+                                            getPoison += poison;
+
+                                            if (getPoison != 0)
+                                            {
+                                                Console.SetCursorPosition(80, 6);
+                                                Console.Write("중독");
+                                                Console.SetCursorPosition(81, 7);
+                                                Console.Write(getPoison);
+                                            }
+                                        }
+                                        Console.SetCursorPosition(59, 9);
+                                        Console.Write("          ");
+                                        Console.SetCursorPosition(59, 9);
+                                        Console.Write(mob.Get_Hp() + "/" + mob.Get_MaxHp());
+                                        Thread.Sleep(100);
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        if (chr.skills[1].count == 0)
+                                        {
+                                            break;
+                                        }
+
+                                        shield = Convert.ToInt32(chr.Get_Arm() * 1.2f);
+                                        Console.SetCursorPosition(48, 20);
+                                        Console.Write("방어");
+                                        Console.SetCursorPosition(49, 21);
+                                        Console.Write(shield);
+                                        Thread.Sleep(100);
+                                        chr.skills[1].count -= 1;
+                                        break;
+                                    }
+
+                            }
                             count += 1;
                             break;
                         }
@@ -313,49 +391,52 @@ namespace FirstProject
                             continue;
                         }
                 }
-                Console.SetCursorPosition(38, 11);
-                Console.Write("                                          ");
-                if (mAvoid < mob.Get_Avoid())
+
+                if (getPoison != 0)
                 {
-                    Console.SetCursorPosition(38, 11);
-                    Console.Write("(적 회피)");
+                    Console.SetCursorPosition(38, 12);
+                    Console.Write("중독 " + getPoison + "의 피해");
                     mob.Set_Hp(mob.Get_Hp() - getPoison);
+                    Console.SetCursorPosition(59, 9);
+                    Console.Write("          ");
+                    Console.SetCursorPosition(59, 9);
+                    Console.Write(mob.Get_Hp() + "/" + mob.Get_MaxHp());
                     getPoison -= 1;
                     if (getPoison < 0)
                     {
                         getPoison = 0;
                     }
-                }
-                else if (pCri < inBattleCri)
-                {
-                    Console.SetCursorPosition(38, 11);
-                    Console.Write("내 공격 " + inBattleAtk * 16 / 10 + "의 피해(크리티컬)");
-                    mob.Set_Hp(mob.Get_Hp() - inBattleAtk * 16 / 10 - getPoison);
-                    getPoison -= 1;
-                    getPoison += poison;
-                    if (getPoison < 0)
+                    Thread.Sleep(100);
+
+                    if (getPoison != 0)
                     {
-                        getPoison = 0;
+                        Console.SetCursorPosition(80, 6);
+                        Console.Write("중독");
+                        Console.SetCursorPosition(81, 7);
+                        Console.Write("  ");
+                        Console.SetCursorPosition(81, 7);
+                        Console.Write(getPoison);
                     }
-                }
-                else
-                {
-                    Console.SetCursorPosition(38, 11);
-                    Console.Write("내 공격 " + inBattleAtk + "의 피해");
-                    mob.Set_Hp(mob.Get_Hp() - inBattleAtk - getPoison);
-                    getPoison -= 1;
-                    getPoison += poison;
-                    if (getPoison < 0)
+                    else
                     {
-                        getPoison = 0;
+                        Console.SetCursorPosition(80, 6);
+                        Console.Write("    ");
+                        Console.SetCursorPosition(81, 7);
+                        Console.Write("  ");
                     }
+                    Thread.Sleep(100);
                 }
 
-                if (mob.Get_Hp() <= 0)
+                if (mob.Get_Hp() == 0)
                 {
-                    mob.Set_Hp(0);
+                    int rCount = 1;
+                    int iPos = 0;
+
+                    Console.SetCursorPosition(38, 12);
+                    Console.Write("                                          ");
                     Console.SetCursorPosition(38, 12);
                     Console.Write("적 사망");
+                    Thread.Sleep(100);
                     // 진행중인 턴 및 현재 체력 표시
                     #region
                     Console.SetCursorPosition(39, 2);
@@ -374,11 +455,11 @@ namespace FirstProject
                     Console.Write(chr.Get_Hp() + "/" + chr.Get_MaxHp());
                     Console.SetCursorPosition(38, 15);
                     #endregion
-                    // 아이템 이름 및 능력 표시
-                    #region
-                    List<Item> items_ = Choice_Item();
-                    Clear_Info();
 
+                    // 보상 리스트 표시
+                    List<Item> items_ = Choice_Item();
+                    #region
+                    Clear_Info();
                     // 바깥 테두리
                     for (int y = 0; y < 29; y++)
                     {
@@ -413,6 +494,8 @@ namespace FirstProject
                             { /* empty */ }
                         }
                     }
+                    Console.SetCursorPosition(62, 7);
+                    Console.Write("새로고침 가능 횟수 :" + rCount + "회");
                     Console.SetCursorPosition(53, 8);
                     Console.Write("보상을 선택하세요");
                     Console.SetCursorPosition(46, 13);
@@ -427,10 +510,7 @@ namespace FirstProject
                     Console.Write(items_[1].abilityName + "lv." + items_[1].abilityLvl);
                     Console.SetCursorPosition(71, 14);
                     Console.Write(items_[2].abilityName + "lv." + items_[2].abilityLvl);
-                    #endregion
-
                     // 아이템 스탯 표시
-                    #region
                     Console.SetCursorPosition(44, 15);
                     if (items_[0].atk != 0)
                     {
@@ -496,8 +576,7 @@ namespace FirstProject
                     }
                     #endregion
 
-                    int iPos = 0;
-                    // 아이템 선택
+                    // 보상 선택
                     while (true)
                     {
                         rewardInput = new ConsoleKeyInfo();
@@ -533,6 +612,137 @@ namespace FirstProject
                                     Clear_Info();
                                     break;
                                 }
+                            case ConsoleKey.R:
+                                {
+                                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                                    Console.Write(" ");
+                                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                                    if(rCount == 1)
+                                    {
+                                        items_ = Choice_Item();
+                                        // 보상 정보 초기화 후 재출력
+                                        #region
+                                        Clear_Info();
+                                        // 바깥 테두리
+                                        for (int y = 0; y < 29; y++)
+                                        {
+                                            for (int x = 0; x < 49; x++)
+                                            {
+                                                Console.SetCursorPosition(x + 37, y);
+                                                if (x == 0 && y == 0)
+                                                {
+                                                    Console.Write("┌");
+                                                }
+                                                else if (x == 48 && y == 0)
+                                                {
+                                                    Console.Write("┐");
+                                                }
+                                                else if (x == 0 && y == 28)
+                                                {
+                                                    Console.Write("└");
+                                                }
+                                                else if (x == 48 && y == 28)
+                                                {
+                                                    Console.Write("┘");
+                                                }
+                                                else if (y == 0 || y == 28)
+                                                {
+                                                    Console.Write("─");
+                                                }
+                                                else if (x == 0 || x == 48)
+                                                {
+                                                    Console.Write("│");
+                                                }
+                                                else
+                                                { /* empty */ }
+                                            }
+                                        }
+                                        Console.SetCursorPosition(53, 8);
+                                        Console.Write("보상을 선택하세요");
+                                        Console.SetCursorPosition(46, 13);
+                                        Console.Write(items_[0].name);
+                                        Console.SetCursorPosition(59, 13);
+                                        Console.Write(items_[1].name);
+                                        Console.SetCursorPosition(72, 13);
+                                        Console.Write(items_[2].name);
+                                        Console.SetCursorPosition(45, 14);
+                                        Console.Write(items_[0].abilityName + "lv." + items_[0].abilityLvl);
+                                        Console.SetCursorPosition(58, 14);
+                                        Console.Write(items_[1].abilityName + "lv." + items_[1].abilityLvl);
+                                        Console.SetCursorPosition(71, 14);
+                                        Console.Write(items_[2].abilityName + "lv." + items_[2].abilityLvl);
+                                        // 아이템 스탯 표시
+                                        Console.SetCursorPosition(44, 15);
+                                        if (items_[0].atk != 0)
+                                        {
+                                            Console.Write("공격력 + " + items_[0].atk);
+                                        }
+                                        if (items_[0].maxHp != 0)
+                                        {
+                                            Console.Write("최대체력 + " + items_[0].maxHp);
+                                        }
+                                        if (items_[0].arm != 0)
+                                        {
+                                            Console.Write("방어력 + " + items_[0].arm);
+                                        }
+                                        if (items_[0].cri != 0)
+                                        {
+                                            Console.Write("크리율 + " + items_[0].cri);
+                                        }
+                                        if (items_[0].avoid != 0)
+                                        {
+                                            Console.Write("회피율 + " + items_[0].avoid);
+                                        }
+                                        Console.SetCursorPosition(57, 15);
+                                        if (items_[1].atk != 0)
+                                        {
+                                            Console.Write("공격력 + " + items_[1].atk);
+                                        }
+                                        if (items_[1].maxHp != 0)
+                                        {
+                                            Console.Write("최대체력 + " + items_[1].maxHp);
+                                        }
+                                        if (items_[1].arm != 0)
+                                        {
+                                            Console.Write("방어력 + " + items_[1].arm);
+                                        }
+                                        if (items_[1].cri != 0)
+                                        {
+                                            Console.Write("크리율 + " + items_[1].cri);
+                                        }
+                                        if (items_[1].avoid != 0)
+                                        {
+                                            Console.Write("회피율 + " + items_[1].avoid);
+                                        }
+                                        Console.SetCursorPosition(70, 15);
+                                        if (items_[2].atk != 0)
+                                        {
+                                            Console.Write("공격력 + " + items_[2].atk);
+                                        }
+                                        if (items_[2].maxHp != 0)
+                                        {
+                                            Console.Write("최대체력 + " + items_[2].maxHp);
+                                        }
+                                        if (items_[2].arm != 0)
+                                        {
+                                            Console.Write("방어력 + " + items_[2].arm);
+                                        }
+                                        if (items_[2].cri != 0)
+                                        {
+                                            Console.Write("크리율 + " + items_[2].cri);
+                                        }
+                                        if (items_[2].avoid != 0)
+                                        {
+                                            Console.Write("회피율 + " + items_[2].avoid);
+                                        }
+                                        #endregion
+                                        rCount -= 1;
+                                        Console.SetCursorPosition(62, 7);
+                                        Console.Write("새로고침 가능 횟수 :" + rCount + "회");
+                                        continue;
+                                    }
+                                    continue;
+                                }
                             default:
                                 {
                                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
@@ -546,8 +756,7 @@ namespace FirstProject
                     return "배틀윈";
                 }
 
-                Console.SetCursorPosition(38, 13);
-                Console.Write("                                          ");
+
                 if (pAvoid < inBattleAvoid)
                 {
                     Console.SetCursorPosition(38, 13);
@@ -555,8 +764,8 @@ namespace FirstProject
                 }
                 else if (mCri < mob.Get_Cri())
                 {
-                    int getDamage = (mob.Get_Atk() * 16 / 10) - reduction;
-                    if((mob.Get_Atk() * 16 / 10) - reduction < 0)
+                    int getDamage = (mob.Get_Atk() * 16 / 10) - reduction - shield;
+                    if((mob.Get_Atk() * 16 / 10) - reduction - shield < 0)
                     {
                         getDamage = 0;
                     }
@@ -566,8 +775,8 @@ namespace FirstProject
                 }
                 else
                 {
-                    int getDamage = mob.Get_Atk() - reduction;
-                    if (mob.Get_Atk() - reduction < 0)
+                    int getDamage = mob.Get_Atk() - reduction - shield;
+                    if (mob.Get_Atk() - reduction - shield < 0)
                     {
                         getDamage = 0;
                     }
@@ -575,6 +784,12 @@ namespace FirstProject
                     Console.Write("적 공격 " + getDamage + "의 피해");
                     chr.Set_Hp(chr.Get_Hp() - getDamage);
                 }
+                Thread.Sleep(100);
+                shield = 0;
+                Console.SetCursorPosition(48, 20);
+                Console.Write("    ");
+                Console.SetCursorPosition(49, 21);
+                Console.Write("   ");
 
                 if (chr.Get_Hp() <= 0)
                 {

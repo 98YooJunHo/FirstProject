@@ -17,6 +17,12 @@ namespace FirstProject
             Console.Write("탑 캐릭터 선택 씬 입니다");
             Console.SetCursorPosition(59, 3);
             Console.Write("기사");
+            Console.SetCursorPosition(59, 5);
+            Console.Write("도적");
+            Console.SetCursorPosition(59, 7);
+            Console.Write("궁수");
+            Console.SetCursorPosition(59, 9);
+            Console.Write("법사");
             Console.SetCursorPosition(54, 26);
             Console.Write("방향키로 이동하고");
             Console.SetCursorPosition(52, 27);
@@ -54,7 +60,7 @@ namespace FirstProject
                     { /* empty */ }
                 }
             }
-            Console.SetCursorPosition(40, 3);
+            Console.SetCursorPosition(43, 3);
             Console.Write("▶");
             while (true)
             {
@@ -67,14 +73,11 @@ namespace FirstProject
                             {
                                 break;
                             }
-                            else
-                            {
-                                Console.SetCursorPosition(40, Console.CursorTop);
-                                Console.Write(" ");
-                                Console.SetCursorPosition(40, Console.CursorTop -= 2);
-                                Console.Write("▶");
-                                break;
-                            }
+                            Console.SetCursorPosition(43, Console.CursorTop);
+                            Console.Write(" ");
+                            Console.SetCursorPosition(43, Console.CursorTop -= 2);
+                            Console.Write("▶");
+                            break;
                         }
                     case ConsoleKey.DownArrow:
                         {
@@ -82,39 +85,38 @@ namespace FirstProject
                             {
                                 break;
                             }
-                            else
-                            {
-                                Console.SetCursorPosition(40, Console.CursorTop);
-                                Console.Write(" ");
-                                Console.SetCursorPosition(40, Console.CursorTop += 2);
-                                Console.Write("▶");
-                                break;
-                            }
+                            Console.SetCursorPosition(43, Console.CursorTop);
+                            Console.Write(" ");
+                            Console.SetCursorPosition(43, Console.CursorTop += 2);
+                            Console.Write("▶");
+                            break;
                         }
                     case ConsoleKey.Enter:
                         {
                             if (Console.CursorTop == 3)
                             {
-                                string chr = "기사";
                                 Console.SetCursorPosition(54, 26);
                                 Console.Write("                    ");
                                 Console.SetCursorPosition(51, 27);
                                 Console.WriteLine("기사를 선택하셨습니다");
                                 Thread.Sleep(1000);
-                                return chr;
+                                return "기사";
                             }
-                            Console.SetCursorPosition(40, Console.CursorTop);
+                            Console.SetCursorPosition(43, Console.CursorTop);
                             Console.Write(" ");
-                            Console.SetCursorPosition(40, Console.CursorTop);
+                            Console.SetCursorPosition(43, Console.CursorTop);
                             Console.Write("▶");
                             break;
                         }
+                    case ConsoleKey.Escape:
+                        {
+                            return "타이틀로";
+                        }
                     default:
                         {
-                            Console.SetCursorPosition(40, Console.CursorTop);
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                             Console.Write(" ");
-                            Console.SetCursorPosition(40, Console.CursorTop);
-                            Console.Write("▶");
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                             break;
                         }
                 }
