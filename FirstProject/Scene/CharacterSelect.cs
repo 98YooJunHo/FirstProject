@@ -79,7 +79,7 @@ namespace FirstProject
                 for (int y = 5; y < 24; y++)
                 {
                     Console.SetCursorPosition(38, y);
-                    Console.Write("                                       ");
+                    Console.Write("                                             ");
                 }
                 Print();
                 playerInput = Console.ReadKey();
@@ -144,6 +144,21 @@ namespace FirstProject
                     case ConsoleKey.Enter:
                         {
                             if (chrNumber == 0)
+                            {
+                                return;
+                            }
+
+                            if (chrNumber == 1)
+                            {
+                                return;
+                            }
+
+                            if (chrNumber == 2)
+                            {
+                                return;
+                            }
+
+                            if (chrNumber == 3)
                             {
                                 return;
                             }
@@ -256,9 +271,9 @@ namespace FirstProject
                         Console.SetCursorPosition(43, 20);
                         Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠀");
                         Console.SetCursorPosition(56, 22);
-                        Console.Write("추가 예정");
-                        //Console.SetCursorPosition(47, 23);
-                        //Console.Write("철갑은 받는 피해를 줄여줍니다");
+                        Console.Write("광기 Lv.3");
+                        Console.SetCursorPosition(46, 23);
+                        Console.Write("광기는 치명타 확률을 올려줍니다");
                         break;
                     }
                 case 2:
@@ -296,9 +311,9 @@ namespace FirstProject
                         Console.SetCursorPosition(45, 20);
                         Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
                         Console.SetCursorPosition(56, 22);
-                        Console.Write("추가 예정");
-                        //Console.SetCursorPosition(47, 23);
-                        //Console.Write("철갑은 받는 피해를 줄여줍니다");
+                        Console.Write("분노 Lv.3");
+                        Console.SetCursorPosition(44, 23);
+                        Console.Write("분노는 전투 중 공격력을 올려줍니다");
                         break;
                     }
                 case 3:
@@ -336,9 +351,9 @@ namespace FirstProject
                         Console.SetCursorPosition(38, 20);
                         Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠈⠙⠛⠛⠛⠿⠿⠿⠿⠛⠛⠋⠀⠀⠀⠀");
                         Console.SetCursorPosition(56, 22);
-                        Console.Write("추가 예정");
-                        //Console.SetCursorPosition(47, 23);
-                        //Console.Write("철갑은 받는 피해를 줄여줍니다");
+                        Console.Write("맹독 Lv.3");
+                        Console.SetCursorPosition(42, 23);
+                        Console.Write("맹독은 전투 중 적에게 지속피해를 줍니다");
                         break;
                     }
             }

@@ -296,7 +296,7 @@ namespace FirstProject
                         }
                     case ConsoleKey.RightArrow:
                         {
-                            if (pos != chr.abilities.Count - 1)
+                            if (pos != chr.skills.Count - 1)
                             {
                                 Console.SetCursorPosition(43 + pos * 9, 27);
                                 Console.Write(" ");

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ability.cs" />
+    <Compile Include="Archer.cs" />
     <Compile Include="BattleScene.cs" />
     <Compile Include="CharacterSelect.cs" />
     <Compile Include="CharacterBase.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Item.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="Knight.cs" />
+    <Compile Include="Mage.cs" />
     <Compile Include="MainScene.cs" />
     <Compile Include="MonsterBase.cs" />
     <Compile Include="Program.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="SelectScene.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="StarveTree.cs" />
+    <Compile Include="Thief.cs" />
     <Compile Include="TitleScene.cs" />
     <Compile Include="UndeadArcher.cs" />
     <Compile Include="UndeadKnight.cs" />

@@ -112,6 +112,33 @@ namespace FirstProject
                                 Thread.Sleep(1000);
                                 return "기사";
                             }
+                            if (Console.CursorTop == 5)
+                            {
+                                Console.SetCursorPosition(54, 26);
+                                Console.Write("                    ");
+                                Console.SetCursorPosition(51, 27);
+                                Console.WriteLine("도적을 선택하셨습니다");
+                                Thread.Sleep(1000);
+                                return "도적";
+                            }
+                            if (Console.CursorTop == 7)
+                            {
+                                Console.SetCursorPosition(54, 26);
+                                Console.Write("                    ");
+                                Console.SetCursorPosition(51, 27);
+                                Console.WriteLine("궁수를 선택하셨습니다");
+                                Thread.Sleep(1000);
+                                return "궁수";
+                            }
+                            if (Console.CursorTop == 9)
+                            {
+                                Console.SetCursorPosition(54, 26);
+                                Console.Write("                    ");
+                                Console.SetCursorPosition(51, 27);
+                                Console.WriteLine("법사를 선택하셨습니다");
+                                Thread.Sleep(1000);
+                                return "법사";
+                            }
                             Console.SetCursorPosition(50, Console.CursorTop);
                             Console.Write(" ");
                             Console.SetCursorPosition(50, Console.CursorTop);

@@ -10,5 +10,11 @@ namespace FirstProject
     {
         public string name;
         public int lvl;
+
+        public void Init(string nam, int lv)
+        {
+            name = nam;
+            lvl = lv;
+        }
     }
 }

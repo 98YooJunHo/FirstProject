@@ -56,6 +56,21 @@ namespace FirstProject
                             {
                                 player = new Knight();
                             }
+
+                            if (chr == "도적")
+                            {
+                                player = new Thief();
+                            }
+
+                            if (chr == "궁수")
+                            {
+                                player = new Archer();
+                            }
+
+                            if (chr == "법사")
+                            {
+                                player = new Mage();
+                            }
                             break;
                         }
                     }
