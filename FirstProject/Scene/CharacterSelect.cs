@@ -15,6 +15,9 @@ namespace FirstProject
         {
             Clear();
 
+            Console.SetCursorPosition(39, 1);
+            Console.Write("뒤로 가기 : q");
+
             if (chr == "기사")
             {
                 chrNumber = 0;
@@ -35,6 +38,8 @@ namespace FirstProject
                 chrNumber = 3;
             }
             System.ConsoleKeyInfo playerInput;
+
+            // 바깥 테두리영역표시
             for (int y = 0; y < 29; y++)
             {
                 for (int x = 0; x < 49; x++)
@@ -68,6 +73,7 @@ namespace FirstProject
                     { /* empty */ }
                 }
             }
+
             while (true)
             {
                 for (int y = 5; y < 24; y++)

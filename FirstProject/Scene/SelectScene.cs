@@ -13,6 +13,8 @@ namespace FirstProject
         {
             Clear();
             System.ConsoleKeyInfo playerInput;
+            Console.SetCursorPosition(39, 1);
+            Console.Write("뒤로 가기 : q");
             Console.SetCursorPosition(56, 1);
             Console.Write("캐릭터 선택");
             Console.SetCursorPosition(59, 3);

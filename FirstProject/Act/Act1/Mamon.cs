@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace FirstProject
 {
-    public class StarveTree : MonsterBase
+    public class Mamon : MonsterBase
     {
-        public StarveTree(float difficult)
+        public Mamon(float difficult)
         {
-            name = "메마른 소나무";
+            name = "  마     몬  ";
             hp = Convert.ToInt32(200 * difficult);
             maxHp = Convert.ToInt32(200 * difficult);
             atk = Convert.ToInt32(19 * difficult);

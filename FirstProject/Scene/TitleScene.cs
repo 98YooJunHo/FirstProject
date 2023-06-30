@@ -12,8 +12,10 @@ namespace FirstProject
         public void Print()
         {
             Clear();
-            Console.SetCursorPosition(52, 27);
+            Console.SetCursorPosition(52, 26);
             Console.Write("아무키나 입력 하세요");
+            Console.SetCursorPosition(58, 27);
+            Console.Write("종료 : q");
             for (int y = 0; y < 29; y++)
             {
                 for (int x = 0; x < 49; x++)
@@ -48,44 +50,35 @@ namespace FirstProject
                 }
             }
 
-            Console.SetCursorPosition(38, 1);
-            Console.Write(" _____");
-            Console.SetCursorPosition(38, 2);
-            Console.Write("|_   _|");
-            Console.SetCursorPosition(38, 3);
-            Console.Write("  | |    ___  __      __  ___  _ __");
-            Console.SetCursorPosition(38, 4);
-            Console.Write("  | |   / _ \\ \\ \\ /\\ / / / _ \\| '__|");
-            Console.SetCursorPosition(38, 5);
-            Console.Write("  | |  | (_) | \\ V  V / |  __/| |");
-            Console.SetCursorPosition(38, 6);
-            Console.Write("  \\_/   \\___/   \\_/\\_/   \\___||_|");
 
-            Console.SetCursorPosition(48, 7);
-            Console.Write(" _____   __");
-            Console.SetCursorPosition(48, 8);
-            Console.Write("|  _  | / _|");
-            Console.SetCursorPosition(48, 9);
-            Console.Write("| | | || |_");
-            Console.SetCursorPosition(48, 10);
-            Console.Write("| | | ||  _|");
-            Console.SetCursorPosition(48, 11);
-            Console.Write("\\ \\_/ /| |");
-            Console.SetCursorPosition(48, 12);
-            Console.Write(" \\___/ |_|");
-
-            Console.SetCursorPosition(53, 13);
-            Console.Write("______               _    _");
-            Console.SetCursorPosition(53, 14);
-            Console.Write("|  _  \\             | |  | |");
-            Console.SetCursorPosition(53, 15);
-            Console.Write("| | | |  ___   __ _ | |_ | |__");
-            Console.SetCursorPosition(53, 16);
-            Console.Write("| | | | / _ \\ / _` || __|| '_ \\");
-            Console.SetCursorPosition(53, 17);
-            Console.Write("| |/ / |  __/| (_| || |_ | | | |");
-            Console.SetCursorPosition(53, 18);
-            Console.Write("|___/   \\___| \\__,_| \\__||_| |_|");
+            Console.SetCursorPosition(40, 6);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀⠀");
+            Console.SetCursorPosition(40, 7);
+            Console.Write("⠀⠀⠀⠀⠀⠛⢛⣿⠛⠛⠁⢀⣀⠀⢀⡀⢀⡀⢀⡀⠀⣀⡀⠀⢀⡀⣀⡀");
+            Console.SetCursorPosition(40, 8);
+            Console.Write("⠀⠀⠀⠀⠀⠀⢸⡟⠀⠀⣼⠟⢹⡧⢸⣧⣿⡇⣾⢱⣿⣭⠿⠀⣿⠟⠻⠃⠀");
+            Console.SetCursorPosition(40, 9);
+            Console.Write("⠀⠀⠀⠀⠀⠀⢸⠇⠀⠀⢿⣶⠾⠁⢸⡟⠸⡿⠃⠸⣿⣤⠶⠠⡿⠀");
+            Console.SetCursorPosition(40, 10);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀");
+            Console.SetCursorPosition(40, 11);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠾⠿⢷⣆⠀⢰⡟⠉⠀");
+            Console.SetCursorPosition(40, 12);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⠁⠀⠀⣸⡏⠚⣿⠛⠃");
+            Console.SetCursorPosition(40, 13);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣤⣠⣴⠟⠀⢠⡿⠀");
+            Console.SetCursorPosition(40, 14);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠀⠀⠀⠈⠁");
+            Console.SetCursorPosition(40, 15);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+            Console.SetCursorPosition(40, 16);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⡿⢷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠶⢠⣿");
+            Console.SetCursorPosition(40, 17);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠈⣿⢀⣴⢾⣶⠄⣾⡄⣰⡖⣰⡆⢸⡇");
+            Console.SetCursorPosition(40, 18);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣃⣀⣴⡟⢸⣟⣋⣡⠀⢸⣷⠟⠀⣿⠀⣾⠇");
+            Console.SetCursorPosition(40, 19);
+            Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠋⠁⠀⠀⠉⠉⠁⠀⠀⠉⠀⠀⠉⠀⠉");
         }
         void Clear()
         {

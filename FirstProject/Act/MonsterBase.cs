@@ -20,7 +20,6 @@ namespace FirstProject
         {
             return type;
         }
-
         public string Get_Name()
         {
             return name;

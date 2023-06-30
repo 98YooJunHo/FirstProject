@@ -68,6 +68,7 @@ namespace FirstProject
                 {
                     return "타이틀로";
                 }
+
                 // 바깥 테두리
                 for (int y = 0; y < 29; y++)
                 {
@@ -145,7 +146,9 @@ namespace FirstProject
                 Console.SetCursorPosition(77, 1);
                 Console.Write(chr.Get_Hp() + "/" + chr.Get_MaxHp());
                 Console.SetCursorPosition(39, 2);
-                Console.Write("액트 진행도:" + count + "/" + "12");
+                Console.Write(act + "액트 진행도:" + count + "/" + "12");
+                Console.SetCursorPosition(39, 4);
+                Console.Write("종료 : q");
                 playerInput = new ConsoleKeyInfo();
                 _case = Run.Exp(act, count, _case);
 
@@ -218,7 +221,7 @@ namespace FirstProject
                             MonsterBase boss = new MonsterBase();
                             if (act == 1)
                             {
-                                boss = new StarveTree(1);
+                                boss = new Mamon(1);
                             }
                             Print_BossInfo(boss);
                             System.ConsoleKeyInfo playerInput1 = new ConsoleKeyInfo();
@@ -476,7 +479,7 @@ namespace FirstProject
                                             MonsterBase mob = new MonsterBase();
                                             if(act == 1)
                                             {
-                                                mob = new StarveTree(1);
+                                                mob = new Mamon(1);
                                             }
                                             BattleScene battle = new BattleScene();
                                             isBossDeath = battle.Do(chr, mob);
@@ -520,11 +523,29 @@ namespace FirstProject
 
                                             if (isBossDeath == "배틀윈")
                                             {
+                                                if(act == 7)
+                                                {
+                                                    Console.SetCursorPosition(50, 14);
+                                                    Console.Write("탑의 정상을 차지하였습니다");
+                                                    Thread.Sleep(1000);
+                                                    return "타이틀로";
+                                                }
                                                 act += 1;
                                                 count = 1;
                                                 Console.SetCursorPosition(52, 14);
                                                 Console.Write("보스를 처치하였습니다");
+                                                Console.SetCursorPosition(43, 15);
+                                                Console.Write("체력과 스킬사용 횟수를 모두 회복합니다");
                                                 Thread.Sleep(1000);
+                                                Console.SetCursorPosition(52, 14);
+                                                Console.Write("                     ");
+                                                Console.SetCursorPosition(43, 15);
+                                                Console.Write("                                      ");
+                                                chr.Set_Hp(chr.Get_MaxHp());
+                                                foreach(Skill skill in chr.skills)
+                                                {
+                                                    skill.count = skill.fullCount;
+                                                }
                                                 break;
                                             }
 
@@ -542,7 +563,7 @@ namespace FirstProject
                             }
                             break;
                         }
-                    case ConsoleKey.Escape:
+                    case ConsoleKey.Q:
                         {
                             return "종료";
                         }
@@ -621,7 +642,9 @@ namespace FirstProject
             }
 
             Console.SetCursorPosition(59, 24);
-            Console.Write("확인");
+            Console.Write("확 인");
+            Console.SetCursorPosition(59, 25);
+            Console.Write("Enter");
         }
 
         void Print_BossInfo(MonsterBase boss)
@@ -639,7 +662,9 @@ namespace FirstProject
             Console.SetCursorPosition(66, 15);
             Console.Write("회피율:" + boss.Get_Avoid());
             Console.SetCursorPosition(59, 18);
-            Console.Write("확인");
+            Console.Write("확 인");
+            Console.SetCursorPosition(59, 19);
+            Console.Write("Enter");
         }
 
     }
