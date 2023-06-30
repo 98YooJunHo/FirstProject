@@ -219,10 +219,39 @@ namespace FirstProject
                             Console.Write(" ");
                             Clear_Info();
                             MonsterBase boss = new MonsterBase();
+
+                            // 액트에 따른 보스 정보 부르기 위함
+                            #region
                             if (act == 1)
                             {
                                 boss = new Mamon(1);
                             }
+                            if (act == 2)
+                            {
+                                boss = new Vaal(1);
+                            }
+                            if (act == 3)
+                            {
+                                boss = new Asmo(1);
+                            }
+                            if (act == 4)
+                            {
+                                boss = new Belphe(1);
+                            }
+                            if (act == 5)
+                            {
+                                boss = new Levi(1);
+                            }
+                            if (act == 6)
+                            {
+                                boss = new Lucifer(1);
+                            }
+                            if (act == 7)
+                            {
+                                boss = new Satan(1);
+                            }
+                            #endregion
+
                             Print_BossInfo(boss);
                             System.ConsoleKeyInfo playerInput1 = new ConsoleKeyInfo();
                             while (playerInput1.Key != ConsoleKey.Enter)
@@ -369,6 +398,9 @@ namespace FirstProject
                                         {
                                             int who = random.Next(3);
                                             MonsterBase mob = null;
+
+                                            // 액트별 적 구분
+                                            #region
                                             if (act == 1)
                                             {
                                                 switch (who)
@@ -384,6 +416,98 @@ namespace FirstProject
                                                         break;
                                                 }
                                             }
+                                            if (act == 2)
+                                            {
+                                                switch (who)
+                                                {
+                                                    case 0:
+                                                        mob = new Gargoyle(1);
+                                                        break;
+                                                    case 1:
+                                                        mob = new HornGargoyle(1);
+                                                        break;
+                                                    case 2:
+                                                        mob = new StoneGargoyle(1);
+                                                        break;
+                                                }
+                                            }
+                                            if (act == 3)
+                                            {
+                                                switch (who)
+                                                {
+                                                    case 0:
+                                                        mob = new Imp(1);
+                                                        break;
+                                                    case 1:
+                                                        mob = new FireImp(1);
+                                                        break;
+                                                    case 2:
+                                                        mob = new BossImp(1);
+                                                        break;
+                                                }
+                                            }
+                                            if (act == 4)
+                                            {
+                                                switch (who)
+                                                {
+                                                    case 0:
+                                                        mob = new Incubus(1);
+                                                        break;
+                                                    case 1:
+                                                        mob = new Succubus(1);
+                                                        break;
+                                                    case 2:
+                                                        mob = new NightMare(1);
+                                                        break;
+                                                }
+                                            }
+                                            if (act == 5)
+                                            {
+                                                switch (who)
+                                                {
+                                                    case 0:
+                                                        mob = new Ghost(1);
+                                                        break;
+                                                    case 1:
+                                                        mob = new Wraith(1);
+                                                        break;
+                                                    case 2:
+                                                        mob = new Banshee(1);
+                                                        break;
+                                                }
+                                            }
+                                            if (act == 6)
+                                            {
+                                                switch (who)
+                                                {
+                                                    case 0:
+                                                        mob = new HeadLessKnight(1);
+                                                        break;
+                                                    case 1:
+                                                        mob = new DeathKnight(1);
+                                                        break;
+                                                    case 2:
+                                                        mob = new Durahan(1);
+                                                        break;
+                                                }
+                                            }
+                                            if (act == 7)
+                                            {
+                                                switch (who)
+                                                {
+                                                    case 0:
+                                                        mob = new DarkKnight(1);
+                                                        break;
+                                                    case 1:
+                                                        mob = new Necromancer(1);
+                                                        break;
+                                                    case 2:
+                                                        mob = new BoneDragon(1);
+                                                        break;
+                                                }
+                                            }
+                                            #endregion
+
                                             BattleScene battle = new BattleScene();
                                             condition = battle.Do(chr, mob);
                                             if (condition == "배틀도중사망")
@@ -477,10 +601,39 @@ namespace FirstProject
                                         {
                                             string isBossDeath;
                                             MonsterBase mob = new MonsterBase();
-                                            if(act == 1)
+
+                                            // 액트별로 보스 불러오기
+                                            #region
+                                            if (act == 1)
                                             {
                                                 mob = new Mamon(1);
                                             }
+                                            if (act == 2)
+                                            {
+                                                mob = new Vaal(1);
+                                            }
+                                            if (act == 3)
+                                            {
+                                                mob = new Asmo(1);
+                                            }
+                                            if (act == 4)
+                                            {
+                                                mob = new Belphe(1);
+                                            }
+                                            if (act == 5)
+                                            {
+                                                mob = new Levi(1);
+                                            }
+                                            if (act == 6)
+                                            {
+                                                mob = new Lucifer(1);
+                                            }
+                                            if (act == 7)
+                                            {
+                                                mob = new Satan(1);
+                                            }
+                                            #endregion
+
                                             BattleScene battle = new BattleScene();
                                             isBossDeath = battle.Do(chr, mob);
                                             _case = 0;
@@ -651,7 +804,7 @@ namespace FirstProject
         {
             Console.SetCursorPosition(57, 9);
             Console.Write("보스 정보");
-            Console.SetCursorPosition(56, 11);
+            Console.SetCursorPosition(55, 11);
             Console.Write(boss.Get_Name());
             Console.SetCursorPosition(48, 13);
             Console.Write("체  력:" + boss.Get_Hp());

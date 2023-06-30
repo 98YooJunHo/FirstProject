@@ -238,14 +238,14 @@ namespace FirstProject
                 }
             }
 
-            Console.SetCursorPosition(58, 9);
+            Console.SetCursorPosition(57, 9);
             Console.Write("          ");
-            Console.SetCursorPosition(58, 9);
-            Console.Write("{0,3}", mob.Get_Hp());
+            Console.SetCursorPosition(57, 9);
+            Console.Write("{0,4}", mob.Get_Hp());
             Console.SetCursorPosition(61, 9);
             Console.Write("/");
             Console.SetCursorPosition(62, 9);
-            Console.Write("{0,-3}", mob.Get_MaxHp());
+            Console.Write("{0,-4}", mob.Get_MaxHp());
 
             // 적의 행동 선택
             #region
@@ -339,10 +339,10 @@ namespace FirstProject
                 Console.Write(mob.Get_Name());
                 Console.SetCursorPosition(60, 19);
                 Console.Write(chr.Get_Name());
-                Console.SetCursorPosition(58, 23);
+                Console.SetCursorPosition(57, 23);
                 Console.Write("          ");
-                Console.SetCursorPosition(58, 23);
-                Console.Write("{0,3}",chr.Get_Hp());
+                Console.SetCursorPosition(57, 23);
+                Console.Write("{0,4}",chr.Get_Hp());
                 Console.SetCursorPosition(61, 23);
                 Console.Write("/");
                 Console.SetCursorPosition(62, 23);
@@ -407,13 +407,16 @@ namespace FirstProject
                             #endregion
                             switch (pos)
                             {
+                                // 0번째 스킬 사용
                                 case 0:
                                     {
+                                        // 적이 회피할 경우
                                         if (mAvoid < mob.Get_Avoid())
                                         {
                                             Console.SetCursorPosition(38, 11);
                                             Console.Write("(적 회피)");
                                         }
+                                        // 크리티컬 발생할 경우
                                         else if (pCri < inBattleCri)
                                         {
                                             Console.SetCursorPosition(38, 11);
@@ -429,6 +432,7 @@ namespace FirstProject
                                                 Console.Write(getPoison);
                                             }
                                         }
+                                        // 그외에 그냥 기본공격
                                         else
                                         {
                                             Console.SetCursorPosition(38, 11);
@@ -444,24 +448,32 @@ namespace FirstProject
                                                 Console.Write(getPoison);
                                             }
                                         }
-                                        Console.SetCursorPosition(58, 9);
+
+                                        // 몹 Hp 출력
+                                        #region
+                                        Console.SetCursorPosition(57, 9);
                                         Console.Write("          ");
-                                        Console.SetCursorPosition(58, 9);
-                                        Console.Write("{0,3}", mob.Get_Hp());
+                                        Console.SetCursorPosition(57, 9);
+                                        Console.Write("{0,4}", mob.Get_Hp());
                                         Console.SetCursorPosition(61, 9);
                                         Console.Write("/");
                                         Console.SetCursorPosition(62, 9);
-                                        Console.Write("{0,-3}", mob.Get_MaxHp());
+                                        Console.Write("{0,-4}", mob.Get_MaxHp());
                                         Thread.Sleep(100);
+                                        #endregion
+
                                         break;
                                     }
+                                // 1번째 스킬 사용
                                 case 1:
                                     {
+                                        // 스킬의 남은 사용 횟수가 0이라면
                                         if (chr.skills[1].count == 0)
                                         {
                                             break;
                                         }
 
+                                        // 스킬 사용 및 효과 획득
                                         shield = Convert.ToInt32(chr.Get_Arm() * 1.5f);
                                         Console.SetCursorPosition(48, 20);
                                         Console.Write("방어");
@@ -485,19 +497,20 @@ namespace FirstProject
                         }
                 }
 
+                // 중독된 상태라면
                 if (getPoison != 0)
                 {
                     Console.SetCursorPosition(38, 12);
                     Console.Write("중독 " + getPoison + "의 피해");
                     mob.Set_Hp(mob.Get_Hp() - getPoison);
-                    Console.SetCursorPosition(58, 9);
+                    Console.SetCursorPosition(57, 9);
                     Console.Write("          ");
-                    Console.SetCursorPosition(58, 9);
-                    Console.Write("{0,3}", mob.Get_Hp());
+                    Console.SetCursorPosition(57, 9);
+                    Console.Write("{0,4}", mob.Get_Hp());
                     Console.SetCursorPosition(61, 9);
                     Console.Write("/");
                     Console.SetCursorPosition(62, 9);
-                    Console.Write("{0,-3}", mob.Get_MaxHp());
+                    Console.Write("{0,-4}", mob.Get_MaxHp());
                     getPoison -= 1;
                     if (getPoison < 0)
                     {
@@ -505,6 +518,7 @@ namespace FirstProject
                     }
                     Thread.Sleep(100);
 
+                    // 중독 피해를 받은 후 에도 중독 상태라면
                     if (getPoison != 0)
                     {
                         Console.SetCursorPosition(80, 6);
@@ -514,6 +528,7 @@ namespace FirstProject
                         Console.SetCursorPosition(81, 7);
                         Console.Write(getPoison);
                     }
+                    // 중독상태가 아니라면
                     else
                     {
                         Console.SetCursorPosition(80, 6);
@@ -540,20 +555,20 @@ namespace FirstProject
                     Console.Write("진행 중인 턴:" + count);
                     Console.SetCursorPosition(55, 5);
                     Console.Write(mob.Get_Name());
-                    Console.SetCursorPosition(58, 9);
+                    Console.SetCursorPosition(57, 9);
                     Console.Write("          ");
-                    Console.SetCursorPosition(58, 9);
-                    Console.Write("{0,3}", mob.Get_Hp());
+                    Console.SetCursorPosition(57, 9);
+                    Console.Write("{0,4}", mob.Get_Hp());
                     Console.SetCursorPosition(61, 9);
                     Console.Write("/");
                     Console.SetCursorPosition(62, 9);
-                    Console.Write("{0,-3}", mob.Get_MaxHp());
+                    Console.Write("{0,-4}", mob.Get_MaxHp());
                     Console.SetCursorPosition(60, 19);
                     Console.Write(chr.Get_Name());
-                    Console.SetCursorPosition(58, 23);
+                    Console.SetCursorPosition(57, 23);
                     Console.Write("          ");
-                    Console.SetCursorPosition(58, 23);
-                    Console.Write("{0,3}", chr.Get_Hp());
+                    Console.SetCursorPosition(57, 23);
+                    Console.Write("{0,4}", chr.Get_Hp());
                     Console.SetCursorPosition(61, 23);
                     Console.Write("/");
                     Console.SetCursorPosition(62, 23);
@@ -830,20 +845,20 @@ namespace FirstProject
                     Console.Write("진행 중인 턴:" + count);
                     Console.SetCursorPosition(55, 5);
                     Console.Write(mob.Get_Name());
-                    Console.SetCursorPosition(58, 9);
+                    Console.SetCursorPosition(57, 9);
                     Console.Write("          ");
-                    Console.SetCursorPosition(58, 9);
-                    Console.Write("{0,3}", mob.Get_Hp());
+                    Console.SetCursorPosition(57, 9);
+                    Console.Write("{0,4}", mob.Get_Hp());
                     Console.SetCursorPosition(61, 9);
                     Console.Write("/");
                     Console.SetCursorPosition(62, 9);
-                    Console.Write("{0,-3}", mob.Get_MaxHp());
+                    Console.Write("{0,-4}", mob.Get_MaxHp());
                     Console.SetCursorPosition(60, 19);
                     Console.Write(chr.Get_Name());
-                    Console.SetCursorPosition(58, 23);
+                    Console.SetCursorPosition(57, 23);
                     Console.Write("          ");
-                    Console.SetCursorPosition(58, 23);
-                    Console.Write("{0,3}", chr.Get_Hp());
+                    Console.SetCursorPosition(57, 23);
+                    Console.Write("{0,4}", chr.Get_Hp());
                     Console.SetCursorPosition(61, 23);
                     Console.Write("/");
                     Console.SetCursorPosition(62, 23);

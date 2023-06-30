@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstProject.Act.Act7
+namespace FirstProject
 {
     public class Satan : MonsterBase
     {

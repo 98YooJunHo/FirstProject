@@ -46,8 +46,28 @@
     <Compile Include="Ability.cs" />
     <Compile Include="Act\Act2\Vaal.cs" />
     <Compile Include="Act\Act3\Asmo.cs" />
+    <Compile Include="Act\Act3\BossImp.cs" />
+    <Compile Include="Act\Act3\FireImp.cs" />
+    <Compile Include="Act\Act3\Imp.cs" />
+    <Compile Include="Act\Act4\Belphe.cs" />
+    <Compile Include="Act\Act5\Banshee.cs" />
+    <Compile Include="Act\Act5\Ghost.cs" />
+    <Compile Include="Act\Act5\Wraith.cs" />
+    <Compile Include="Act\Act6\DeathKnight.cs" />
+    <Compile Include="Act\Act6\Durahan.cs" />
+    <Compile Include="Act\Act5\Levi.cs" />
+    <Compile Include="Act\Act6\HeadLessKnight.cs" />
+    <Compile Include="Act\Act6\Lucifer.cs" />
+    <Compile Include="Act\Act4\Incubus.cs" />
+    <Compile Include="Act\Act4\NightMare.cs" />
+    <Compile Include="Act\Act7\BoneDragon.cs" />
+    <Compile Include="Act\Act7\DarkKnight.cs" />
+    <Compile Include="Act\Act7\Necromancer.cs" />
+    <Compile Include="Act\Act7\Satan.cs" />
+    <Compile Include="Act\Act4\Succubus.cs" />
     <Compile Include="Character\Archer.cs" />
     <Compile Include="Act\Act2\Gargoyle.cs" />
+    <Compile Include="Act\Act2\HornGargoyle.cs" />
     <Compile Include="Scene\BattleScene.cs" />
     <Compile Include="Scene\CharacterSelect.cs" />
     <Compile Include="Character\CharacterBase.cs" />
@@ -71,15 +91,11 @@
     <Compile Include="Act\Act1\UndeadArcher.cs" />
     <Compile Include="Act\Act1\UndeadKnight.cs" />
     <Compile Include="Act\Act1\UndeadShield.cs" />
+    <Compile Include="Act\Act2\StoneGargoyle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Act\Act4\" />
-    <Folder Include="Act\Act5\" />
-    <Folder Include="Act\Act6\" />
-    <Folder Include="Act\Act7\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,12 +11,12 @@ namespace FirstProject
         public Gargoyle(float difficult)
         {
             name = " 가   고   일";
-            hp = Convert.ToInt32(100 * difficult);
-            maxHp = Convert.ToInt32(100 * difficult);
-            atk = Convert.ToInt32(18 * difficult);
-            cri = Convert.ToInt32(6 * difficult);
+            hp = Convert.ToInt32(105 * difficult);
+            maxHp = Convert.ToInt32(105 * difficult);
+            atk = Convert.ToInt32(13 * difficult);
+            cri = Convert.ToInt32(5 * difficult);
             avoid = Convert.ToInt32(3 * difficult);
-            type = "악마";
+            type = "석상";
         }
     }
 }

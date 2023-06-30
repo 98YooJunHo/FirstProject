@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace FirstProject.Act.Act3
+namespace FirstProject
 {
     public class Asmo : MonsterBase
     {

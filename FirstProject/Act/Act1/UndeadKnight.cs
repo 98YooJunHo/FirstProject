@@ -13,7 +13,7 @@ namespace FirstProject
             name = "되살아난 검사";
             hp = Convert.ToInt32(70 * difficult);
             maxHp = Convert.ToInt32(70 * difficult);
-            atk = Convert.ToInt32(12 * difficult);
+            atk = Convert.ToInt32(10 * difficult);
             cri = Convert.ToInt32(4 * difficult);
             avoid = Convert.ToInt32(2 * difficult);
             type = "언데드";

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstProject.Act.Act2
+namespace FirstProject
 {
     public class Vaal : MonsterBase
     {
