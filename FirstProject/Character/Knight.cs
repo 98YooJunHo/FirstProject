@@ -11,18 +11,19 @@ namespace FirstProject
         public Knight()
         {
             name = "기사";
-            //hp = 170;
-            //maxHp = 170;
-            //atk = 11;
-            //arm = 14;
-            //cri = 9;
-            //avoid = 4;
-            hp = 600;
-            maxHp = 600;
-            atk = 60;
-            arm = 60;
-            cri = 75;
-            avoid = 75;
+            hp = 170;
+            maxHp = 170;
+            atk = 11;
+            arm = 14;
+            cri = 9;
+            avoid = 4;
+
+            //hp = 600;
+            //maxHp = 600;
+            //atk = 60;
+            //arm = 60;
+            //cri = 75;
+            //avoid = 75;
 
             skills = new List<Skill>();
             Skill normalAttack = new Skill();
