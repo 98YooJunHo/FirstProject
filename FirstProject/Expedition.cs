@@ -11,45 +11,73 @@ namespace FirstProject
     {
         Random random = new Random();
 
+        /// <summary>
+        /// 진행중인 정보를 저장하기 위한 case를 반환하는 함수,
+        /// case가 0일 경우 새로운 진행 정보를 저장하기 위해 
+        /// 정해진 확률로 case값에 새로운 수를 저장함
+        /// </summary>
+        /// <param name="act"></param>
+        /// <param name="count"></param>
+        /// <param name="cas"></param>
+        /// <returns></returns>
         public int Exp(int act ,int count, int cas)
         {
-            int case_ = 0;
+            int case_;
             
+            // 이미 정해진 진행 정보가 있다면
             if(cas != 0)
             {
                 return cas;
             }
 
+            // 액트1에 진척도가 1이라면
             if(act == 1 && count == 1)
             {
+                // 운명 선택
                 case_ = 5;
                 return case_;
             }
 
             int battleRate = random.Next(100);
+            // 액트 진척도가 11이라면
             if(count == 11)
             {
+                // 캠핑
                 case_ = 1;
                 return case_;
             }
+            // 액트 진척도가 12라면
             else if (count == 12)
             {
+                // 보스전
                 case_ = 2;
                 return case_;
             }
-            else if(battleRate < 50) 
+            // 그외에 70퍼확률로
+            else if(battleRate < 70) 
             {
+                // 적 조우
                 case_ = 3;
                 return case_;
             }
-            else if(battleRate > 49)
+            // 30퍼확률로
+            else if(battleRate > 69)
             {
+                // 이벤트 발생
                 case_ = 4;
                 return case_;
             }
             return 0;
         }
 
+        /// <summary>
+        /// case에 따른 진행중인 상황을 출력하는 함수,
+        /// fate리스트는 운명 선택시 선택할 3가지 운명을 보여줌
+        /// roll의 경우 운명 선택시 새로고침 횟수를 보여줌
+        /// </summary>
+        /// <param name="fates_"></param>
+        /// <param name="_case"></param>
+        /// <param name="roll"></param>
         public void Print(List<Fate> fates_, int _case, int roll)
         {
             switch(_case)
@@ -117,6 +145,10 @@ namespace FirstProject
             }
         }
 
+        /// <summary>
+        /// 전체 운명중 랜덤으로 3가지를 불러오는 함수
+        /// </summary>
+        /// <returns></returns>
         public List<Fate> Choice_Fate()
         {
             FateList fates = new FateList();

@@ -152,46 +152,53 @@ namespace FirstProject
                 playerInput = new ConsoleKeyInfo();
                 _case = Run.Exp(act, count, _case);
 
-                if ((_case == 5 && fates.Count == 0))
+                // 운명 선택중이고 불러온 운명이 없다면
+                if (_case == 5 && fates.Count == 0)
                 {
+                    // 운명 3가지 불러오기
                     fates = Run.Choice_Fate();
                 }
 
                 Run.Print(fates, _case, fateRoll);
-                if (_case == 5)
-                {
-                    Console.SetCursorPosition(49 + fatePos * 13, 15);
-                    Console.Write("▲");
-                }
-
+                // 진행중인 상황에 따라 커서위치 표시
+                #region
+                // 보스전 직전 캠핑
                 if (_case == 1)
                 {
                     Console.SetCursorPosition(38, 17 + campPos * 2);
                     Console.Write("▶");
                 }
-
+                // 보스전
                 if (_case == 2)
                 {
                     Console.SetCursorPosition(38, 17 + bossPos * 2);
                     Console.Write("▶");
                 }
-
+                // 적 조우
                 if (_case == 3)
                 {
                     Console.SetCursorPosition(38, 17 + battlePos * 2);
                     Console.Write("▶");
                 }
-
+                // 이벤트
                 if (_case == 4)
                 {
                     Console.SetCursorPosition(38, 17 + eventPos * 2);
                     Console.Write("▶");
                 }
+                // 운명 선택
+                if (_case == 5)
+                {
+                    Console.SetCursorPosition(49 + fatePos * 13, 15);
+                    Console.Write("▲");
+                }
+                #endregion
 
                 playerInput = Console.ReadKey();
                 // switch() 시작
                 switch (playerInput.Key)
                 {
+                    // 플레이어 정보 불러오기
                     case ConsoleKey.I:
                         {
                             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
@@ -199,6 +206,7 @@ namespace FirstProject
                             Clear_Info();
                             Print_ChrInfo(chr);
                             System.ConsoleKeyInfo playerInput1 = new ConsoleKeyInfo();
+                            // 엔터를 누르기 전까지 플레이어 정보 지속 출력
                             while (playerInput1.Key != ConsoleKey.Enter)
                             {
                                 playerInput1 = Console.ReadKey();
@@ -213,6 +221,7 @@ namespace FirstProject
                             Clear_Info();
                             break;
                         }
+                    // 액트에 따른 보스 정보 부르기
                     case ConsoleKey.B:
                         {
                             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
@@ -220,7 +229,6 @@ namespace FirstProject
                             Clear_Info();
                             MonsterBase boss = new MonsterBase();
 
-                            // 액트에 따른 보스 정보 부르기 위함
                             #region
                             if (act == 1)
                             {
@@ -252,8 +260,10 @@ namespace FirstProject
                             }
                             #endregion
 
+                            // 보스 정보 출력
                             Print_BossInfo(boss);
                             System.ConsoleKeyInfo playerInput1 = new ConsoleKeyInfo();
+                            // 엔터를 누르기 전까지 보스 정보 지속 출력
                             while (playerInput1.Key != ConsoleKey.Enter)
                             {
                                 playerInput1 = Console.ReadKey();
@@ -268,6 +278,7 @@ namespace FirstProject
                             Clear_Info();
                             break;
                         }
+                    // 메인 씬에서의 상하 방향키는 이벤트와 캠핑때만 사용함
                     case ConsoleKey.DownArrow:
                         {
                             if (_case == 4)
@@ -318,6 +329,7 @@ namespace FirstProject
                             }
                             break;
                         }
+                    // 메인 씬에서의 좌우 방향키는 운명선택때만 사용함
                     case ConsoleKey.LeftArrow:
                         {
                             if (_case == 5)
@@ -346,6 +358,7 @@ namespace FirstProject
                             }
                             break;
                         }
+                    // 운명 1회 새로고침 가능
                     case ConsoleKey.R:
                         {
                             if (_case == 5 && fateRoll == 1)
@@ -358,36 +371,164 @@ namespace FirstProject
                             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                             break;
                         }
+                    // 케이스 별로 엔터 실행 후 해당 케이스 진행
                     case ConsoleKey.Enter:
                         {
                             Clear_Info();
                             switch (_case)
                             {
-                                // 운명 선택
-                                case 5:
+                                // 캠핑
+                                case 1:
                                     {
-                                        if (fatePos == 0)
+                                        // 회복 시 최대체력의 50퍼센트 만큼 회복
+                                        if (campPos == 0)
                                         {
-                                            chr.Add_Ability(fates[0].abilityName, fates[0].abilityLvl);
+                                            chr.Set_Hp(chr.Get_Hp() + (chr.Get_MaxHp() / 10) * 5);
+                                            Clear_Info();
+                                            Console.SetCursorPosition(55, 15);
+                                            Console.Write("푹쉬고 갑니다");
+                                            Thread.Sleep(1000);
+                                            Console.SetCursorPosition(55, 15);
+                                            Console.Write("             ");
                                             _case = 0;
                                             count += 1;
                                             break;
                                         }
-
-                                        if (fatePos == 1)
+                                        // 명상 시 모든 스킬의 사용가능 횟수 최대치로 회복
+                                        else if (campPos == 1)
                                         {
-                                            chr.Add_Ability(fates[1].abilityName, fates[1].abilityLvl);
+                                            foreach (Skill skill in chr.skills)
+                                            {
+                                                skill.count = skill.fullCount;
+                                            }
+                                            Clear_Info();
+                                            Console.SetCursorPosition(55, 15);
+                                            Console.Write("잘쉬고 갑니다");
+                                            Thread.Sleep(1000);
+                                            Console.SetCursorPosition(55, 15);
+                                            Console.Write("             ");
                                             _case = 0;
                                             count += 1;
                                             break;
                                         }
-
-                                        if (fatePos == 2)
+                                        break;
+                                    }
+                                // 보스전
+                                case 2:
+                                    {
+                                        if (battlePos == 0)
                                         {
-                                            chr.Add_Ability(fates[2].abilityName, fates[2].abilityLvl);
+                                            string isBossDeath;
+                                            MonsterBase mob = new MonsterBase();
+
+                                            // 액트별로 보스 불러오기
+                                            #region
+                                            if (act == 1)
+                                            {
+                                                mob = new Mamon(1);
+                                            }
+                                            if (act == 2)
+                                            {
+                                                mob = new Vaal(1);
+                                            }
+                                            if (act == 3)
+                                            {
+                                                mob = new Asmo(1);
+                                            }
+                                            if (act == 4)
+                                            {
+                                                mob = new Belphe(1);
+                                            }
+                                            if (act == 5)
+                                            {
+                                                mob = new Levi(1);
+                                            }
+                                            if (act == 6)
+                                            {
+                                                mob = new Lucifer(1);
+                                            }
+                                            if (act == 7)
+                                            {
+                                                mob = new Satan(1);
+                                            }
+                                            #endregion
+
+                                            BattleScene battle = new BattleScene();
+                                            isBossDeath = battle.Do(chr, mob);
                                             _case = 0;
-                                            count += 1;
-                                            break;
+                                            count = 0;
+                                            Clear();
+                                            // 바깥 테두리
+                                            for (int y = 0; y < 29; y++)
+                                            {
+                                                for (int x = 0; x < 49; x++)
+                                                {
+                                                    Console.SetCursorPosition(x + 37, y);
+                                                    if (x == 0 && y == 0)
+                                                    {
+                                                        Console.Write("┌");
+                                                    }
+                                                    else if (x == 48 && y == 0)
+                                                    {
+                                                        Console.Write("┐");
+                                                    }
+                                                    else if (x == 0 && y == 28)
+                                                    {
+                                                        Console.Write("└");
+                                                    }
+                                                    else if (x == 48 && y == 28)
+                                                    {
+                                                        Console.Write("┘");
+                                                    }
+                                                    else if (y == 0 || y == 28)
+                                                    {
+                                                        Console.Write("─");
+                                                    }
+                                                    else if (x == 0 || x == 48)
+                                                    {
+                                                        Console.Write("│");
+                                                    }
+                                                    else
+                                                    { /* empty */ }
+                                                }
+                                            }
+
+                                            // 보스가 죽었다면
+                                            if (isBossDeath == "배틀윈")
+                                            {
+                                                // 액트 7 이라면
+                                                if(act == 7)
+                                                {
+                                                    Console.SetCursorPosition(50, 14);
+                                                    Console.Write("탑의 정상을 차지하였습니다");
+                                                    Thread.Sleep(1000);
+                                                    return "타이틀로";
+                                                }
+                                                // 그외 다른 액트 보스의 경우
+                                                act += 1;
+                                                count = 1;
+                                                Console.SetCursorPosition(52, 14);
+                                                Console.Write("보스를 처치하였습니다");
+                                                Console.SetCursorPosition(43, 15);
+                                                Console.Write("체력과 스킬사용 횟수를 모두 회복합니다");
+                                                Thread.Sleep(1000);
+                                                Console.SetCursorPosition(52, 14);
+                                                Console.Write("                     ");
+                                                Console.SetCursorPosition(43, 15);
+                                                Console.Write("                                      ");
+                                                chr.Set_Hp(chr.Get_MaxHp());
+                                                foreach(Skill skill in chr.skills)
+                                                {
+                                                    skill.count = skill.fullCount;
+                                                }
+                                                break;
+                                            }
+
+                                            // 내가 죽었다면
+                                            if (isBossDeath == "배틀도중사망")
+                                            {
+                                                return "타이틀로";
+                                            }
                                         }
                                         break;
                                     }
@@ -525,10 +666,14 @@ namespace FirstProject
                                     {
                                         if (eventPos == 0)
                                         {
-                                            int Istoxic = random.Next(10);
-                                            if (Istoxic < 2)
+                                            // 샘의 종류를 결정할 랜덤수
+                                            int IsWhat = random.Next(10);
+                                            // 10퍼센트 확률로 썩은샘 (0)
+                                            if (IsWhat < 1)
                                             {
+                                                // 최대체력의 10퍼센트 만큼 체력 감소
                                                 chr.Set_Hp(chr.Get_Hp() - chr.Get_MaxHp() / 10);
+                                                // 샘 정보 출력
                                                 Clear_Info();
                                                 Console.SetCursorPosition(56, 15);
                                                 Console.Write("썩은샘이였다");
@@ -536,9 +681,12 @@ namespace FirstProject
                                                 Console.SetCursorPosition(56, 15);
                                                 Console.Write("            ");
                                             }
-                                            else
+                                            // 50퍼센트 확률로 맑은 샘 (1,2,3,4,5)
+                                            else if (IsWhat < 6)
                                             {
+                                                // 최대체력의 20퍼센트 만큼 체력 회복
                                                 chr.Set_Hp(chr.Get_Hp() + (chr.Get_MaxHp() / 10) * 2);
+                                                // 샘 정보 출력
                                                 Clear_Info();
                                                 Console.SetCursorPosition(56, 15);
                                                 Console.Write("맑은샘이였다");
@@ -546,7 +694,88 @@ namespace FirstProject
                                                 Console.SetCursorPosition(56, 15);
                                                 Console.Write("            ");
                                             }
-
+                                            // 20퍼센트 확률로 기억의 샘 (6,7)
+                                            else if (IsWhat < 8)
+                                            {
+                                                // 갖고 있는 능력중 한가지를 1레벨 증가
+                                                int rand = random.Next(chr.Get_Ability_Length());
+                                                Ability randAbil = chr.Get_Ability(rand);
+                                                chr.Add_Ability(randAbil.name, 1);
+                                                // 샘 정보 출력
+                                                Clear_Info();
+                                                Console.SetCursorPosition(55, 15);
+                                                Console.Write("기억의샘이였다");
+                                                Thread.Sleep(1000);
+                                                Console.SetCursorPosition(55, 15);
+                                                Console.Write("              ");
+                                            }
+                                            // 나머지 20퍼센트 확률로 강화의 샘 (8,9)
+                                            else
+                                            {
+                                                // 어떤 스탯을 강화할지 랜덤돌림
+                                                int rand = random.Next(5);
+                                                // 선택된 랜덤스탯 강화 스위치 문
+                                                switch(rand)
+                                                {
+                                                    case 0:
+                                                        {
+                                                            int hpPlus = chr.Get_MaxHp() / 6;
+                                                            if(hpPlus < 1)
+                                                            {
+                                                                hpPlus = 1;
+                                                            }
+                                                            chr.Set_MaxHp(hpPlus);
+                                                            break;
+                                                        }
+                                                    case 1:                                                        
+                                                        {
+                                                            int atkPlus = chr.Get_Atk() / 6;
+                                                            if(atkPlus < 1)
+                                                            {
+                                                                atkPlus = 1;
+                                                            }
+                                                            chr.Set_Atk(atkPlus);
+                                                            break;
+                                                        }
+                                                    case 2:
+                                                        {
+                                                            int armPlus = chr.Get_Arm() / 6;
+                                                            if(armPlus < 1)
+                                                            {
+                                                                armPlus = 1;
+                                                            }
+                                                            chr.Set_Arm(armPlus);
+                                                            break;
+                                                        }
+                                                    case 3:
+                                                        {
+                                                            int criPlus = chr.Get_Cri() / 6;
+                                                            if(criPlus < 1)
+                                                            {
+                                                                criPlus = 1;
+                                                            }
+                                                            chr.Set_Cri(criPlus);
+                                                            break;
+                                                        }
+                                                    case 4:
+                                                        {
+                                                            int avoidPlus = chr.Get_Avoid() / 6;
+                                                            if(avoidPlus < 1)
+                                                            {
+                                                                avoidPlus = 1;
+                                                            }
+                                                            chr.Set_Avoid(avoidPlus);
+                                                            break;
+                                                        }
+                                                }
+                                                // 샘 정보 출력
+                                                Clear_Info();
+                                                Console.SetCursorPosition(55, 15);
+                                                Console.Write("강화의샘이였다");
+                                                Thread.Sleep(1000);
+                                                Console.SetCursorPosition(55, 15);
+                                                Console.Write("              ");
+                                            }
                                             _case = 0;
                                             count += 1;
                                             break;
@@ -560,152 +789,32 @@ namespace FirstProject
                                         }
                                         break;
                                     }
-                                // 캠핑
-                                case 1:
+                                // 운명 선택
+                                case 5:
                                     {
-                                        if (campPos == 0)
+                                        // 왼쪽 운명
+                                        if (fatePos == 0)
                                         {
-                                            chr.Set_Hp(chr.Get_Hp() + (chr.Get_MaxHp() / 10) * 5);
-                                            Clear_Info();
-                                            Console.SetCursorPosition(55, 15);
-                                            Console.Write("푹쉬고 갑니다");
-                                            Thread.Sleep(1000);
-                                            Console.SetCursorPosition(55, 15);
-                                            Console.Write("             ");
+                                            chr.Add_Ability(fates[0].abilityName, fates[0].abilityLvl);
                                             _case = 0;
                                             count += 1;
                                             break;
                                         }
-                                        else if (campPos == 1)
+                                        // 가운데 운명
+                                        if (fatePos == 1)
                                         {
-                                            foreach (Skill skill in chr.skills)
-                                            {
-                                                skill.count = skill.fullCount;
-                                            }
-                                            Clear_Info();
-                                            Console.SetCursorPosition(55, 15);
-                                            Console.Write("잘쉬고 갑니다");
-                                            Thread.Sleep(1000);
-                                            Console.SetCursorPosition(55, 15);
-                                            Console.Write("             ");
+                                            chr.Add_Ability(fates[1].abilityName, fates[1].abilityLvl);
                                             _case = 0;
                                             count += 1;
                                             break;
                                         }
-                                        break;
-                                    }
-                                // 보스전
-                                case 2:
-                                    {
-                                        if (battlePos == 0)
+                                        // 오른쪽 운명
+                                        if (fatePos == 2)
                                         {
-                                            string isBossDeath;
-                                            MonsterBase mob = new MonsterBase();
-
-                                            // 액트별로 보스 불러오기
-                                            #region
-                                            if (act == 1)
-                                            {
-                                                mob = new Mamon(1);
-                                            }
-                                            if (act == 2)
-                                            {
-                                                mob = new Vaal(1);
-                                            }
-                                            if (act == 3)
-                                            {
-                                                mob = new Asmo(1);
-                                            }
-                                            if (act == 4)
-                                            {
-                                                mob = new Belphe(1);
-                                            }
-                                            if (act == 5)
-                                            {
-                                                mob = new Levi(1);
-                                            }
-                                            if (act == 6)
-                                            {
-                                                mob = new Lucifer(1);
-                                            }
-                                            if (act == 7)
-                                            {
-                                                mob = new Satan(1);
-                                            }
-                                            #endregion
-
-                                            BattleScene battle = new BattleScene();
-                                            isBossDeath = battle.Do(chr, mob);
+                                            chr.Add_Ability(fates[2].abilityName, fates[2].abilityLvl);
                                             _case = 0;
-                                            count = 0;
-                                            Clear();
-                                            // 바깥 테두리
-                                            for (int y = 0; y < 29; y++)
-                                            {
-                                                for (int x = 0; x < 49; x++)
-                                                {
-                                                    Console.SetCursorPosition(x + 37, y);
-                                                    if (x == 0 && y == 0)
-                                                    {
-                                                        Console.Write("┌");
-                                                    }
-                                                    else if (x == 48 && y == 0)
-                                                    {
-                                                        Console.Write("┐");
-                                                    }
-                                                    else if (x == 0 && y == 28)
-                                                    {
-                                                        Console.Write("└");
-                                                    }
-                                                    else if (x == 48 && y == 28)
-                                                    {
-                                                        Console.Write("┘");
-                                                    }
-                                                    else if (y == 0 || y == 28)
-                                                    {
-                                                        Console.Write("─");
-                                                    }
-                                                    else if (x == 0 || x == 48)
-                                                    {
-                                                        Console.Write("│");
-                                                    }
-                                                    else
-                                                    { /* empty */ }
-                                                }
-                                            }
-
-                                            if (isBossDeath == "배틀윈")
-                                            {
-                                                if(act == 7)
-                                                {
-                                                    Console.SetCursorPosition(50, 14);
-                                                    Console.Write("탑의 정상을 차지하였습니다");
-                                                    Thread.Sleep(1000);
-                                                    return "타이틀로";
-                                                }
-                                                act += 1;
-                                                count = 1;
-                                                Console.SetCursorPosition(52, 14);
-                                                Console.Write("보스를 처치하였습니다");
-                                                Console.SetCursorPosition(43, 15);
-                                                Console.Write("체력과 스킬사용 횟수를 모두 회복합니다");
-                                                Thread.Sleep(1000);
-                                                Console.SetCursorPosition(52, 14);
-                                                Console.Write("                     ");
-                                                Console.SetCursorPosition(43, 15);
-                                                Console.Write("                                      ");
-                                                chr.Set_Hp(chr.Get_MaxHp());
-                                                foreach(Skill skill in chr.skills)
-                                                {
-                                                    skill.count = skill.fullCount;
-                                                }
-                                                break;
-                                            }
-
-                                            if (isBossDeath == "배틀도중사망")
-                                            {
-                                                return "타이틀로";
-                                            }
+                                            count += 1;
+                                            break;
                                         }
                                         break;
                                     }
@@ -716,6 +825,7 @@ namespace FirstProject
                             }
                             break;
                         }
+                    // q입력시 종료
                     case ConsoleKey.Q:
                         {
                             return "종료";
@@ -732,6 +842,9 @@ namespace FirstProject
             }   // while;
         }
 
+        /// <summary>
+        /// 테두리를 포함한 출력을 지우는 함수
+        /// </summary>
         void Clear()
         {
             for (int y = 1; y < 28; y++)
@@ -744,6 +857,9 @@ namespace FirstProject
             }
         }
 
+        /// <summary>
+        /// 테두리를 제외한 내부 출력을 지우는 함수
+        /// </summary>
         void Clear_Info()
         {
             for (int y = 4; y < 26; y++)
@@ -756,6 +872,10 @@ namespace FirstProject
             }
         }
 
+        /// <summary>
+        /// 플레이어 정보 출력 함수
+        /// </summary>
+        /// <param name="chr"></param>
         void Print_ChrInfo(CharacterBase chr)
         {
             Console.SetCursorPosition(56, 7);
@@ -800,6 +920,10 @@ namespace FirstProject
             Console.Write("Enter");
         }
 
+        /// <summary>
+        /// 보스 정보 출력 함수
+        /// </summary>
+        /// <param name="boss"></param>
         void Print_BossInfo(MonsterBase boss)
         {
             Console.SetCursorPosition(57, 9);

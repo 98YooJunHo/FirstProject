@@ -180,7 +180,11 @@ namespace FirstProject
             {
                 if (abilities[index].lvl != 7)
                 {
-                    abilities[index].lvl += 1;
+                    abilities[index].lvl += lvl;
+                    if (abilities[index].lvl > 7)
+                    {
+                        abilities[index].lvl = 7;
+                    }
                 }
             }
 

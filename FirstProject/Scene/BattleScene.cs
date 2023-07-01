@@ -11,6 +11,13 @@ namespace FirstProject
     public class BattleScene
     {
         Random random = new Random();
+
+        /// <summary>
+        /// 플레이어와 몹의 정보를 가져와서 전투를 치르는 함수
+        /// </summary>
+        /// <param name="chr"></param>
+        /// <param name="mob"></param>
+        /// <returns></returns>
         public string Do(CharacterBase chr, MonsterBase mob)
         {
             Clear();
@@ -174,7 +181,7 @@ namespace FirstProject
             }
             #endregion
 
-            // 능력 체크
+            // 플레이어 능력 체크
             foreach (Ability ability in chr.abilities)
             {
                 if (ability.name == "맹독")
@@ -350,6 +357,8 @@ namespace FirstProject
                 #endregion
 
 
+                // 스킬 사용 가능 횟수가 -1인 스킬은 무한대로 표시
+                // 그렇지 않은 스킬은 사용 가능 횟수 표시
                 for (int i = 0; i < chr.Get_Skills_Length(); i++)
                 {
                     Skill tempSkill = chr.Get_Skill(i);
@@ -365,9 +374,12 @@ namespace FirstProject
                         Console.Write("∞");
                     }
                 }
+                // 스킬 사용위치에 커서표시
                 Console.SetCursorPosition(43 + pos * 9, 27);
                 Console.Write("▲");
                 playerInput = Console.ReadKey();
+
+                // 좌우 방향키로 스킬 사용위치 커서 이동, 엔터로 사용, 0번은 기본공격 고정, 1번은 기본방어 고정
                 switch (playerInput.Key)
                 {
                     case ConsoleKey.LeftArrow:
@@ -617,18 +629,17 @@ namespace FirstProject
                     Console.Write("새로고침(r) 가능 횟수 :" + rCount + "회");
                     Console.SetCursorPosition(53, 9);
                     Console.Write("보상을 선택하세요");
-                    Console.SetCursorPosition(46, 13);
-                    Console.Write(items_[0].name);
-                    Console.SetCursorPosition(59, 13);
-                    Console.Write(items_[1].name);
-                    Console.SetCursorPosition(72, 13);
-                    Console.Write(items_[2].name);
-                    Console.SetCursorPosition(45, 14);
-                    Console.Write(items_[0].abilityName + "lv." + items_[0].abilityLvl);
-                    Console.SetCursorPosition(58, 14);
-                    Console.Write(items_[1].abilityName + "lv." + items_[1].abilityLvl);
-                    Console.SetCursorPosition(71, 14);
-                    Console.Write(items_[2].abilityName + "lv." + items_[2].abilityLvl);
+                    // 아이템 이름 및 능력 표시
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Console.SetCursorPosition(46 + 13*i, 13);
+                        Console.Write(items_[i].name);
+                        if (items_[i].abilityName != null)
+                        {
+                            Console.SetCursorPosition(45 + 13 * i, 14);
+                            Console.Write(items_[i].abilityName + "lv." + items_[i].abilityLvl);
+                        }
+                    }
                     // 아이템 스탯 표시
                     for (int i = 0; i < 3; i++)
                     {
@@ -665,8 +676,11 @@ namespace FirstProject
                         Console.Write("▲");
 
                         rewardInput = Console.ReadKey();
+                        // 좌우 방향키로 선택할 보상을 변경가능, 엔터로 보상 선택
+                        // 1회에 한하여 r키로 보상 리롤가능
                         switch (rewardInput.Key)
                         {
+                            // 좌우 방향키로 선택할 보상 변경
                             case ConsoleKey.LeftArrow:
                                 {
                                     if (iPos != 0)
@@ -687,12 +701,14 @@ namespace FirstProject
                                     }
                                     continue;
                                 }
+                            // 엔터키로 보상 획득
                             case ConsoleKey.Enter:
                                 {
                                     Add_Reward(chr, items_[iPos]);
                                     Clear_Info();
                                     break;
                                 }
+                            // r키로 보상 1회 새로고침 가능
                             case ConsoleKey.R:
                                 {
                                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
@@ -796,10 +812,11 @@ namespace FirstProject
                         }
                         break;
                     }
+
                     return "배틀윈";
                 }
 
-
+                // 플레이어 피격 정보 출력하는 곳
                 if (pAvoid < inBattleAvoid)
                 {
                     Console.SetCursorPosition(38, 13);
@@ -943,6 +960,9 @@ namespace FirstProject
             }   // while
         }
 
+        /// <summary>
+        /// 테두리를 포함한 출력을 지우는 함수
+        /// </summary>
         void Clear()
         {
             for (int y = 0; y < 29; y++)
@@ -955,6 +975,9 @@ namespace FirstProject
             }
         }
 
+        /// <summary>
+        /// 테두리를 제외한 내부 출력을 지우는 함수
+        /// </summary>
         void Clear_Info()
         {
             for (int y = 4; y < 28; y++)
@@ -967,6 +990,10 @@ namespace FirstProject
             }
         }
 
+        /// <summary>
+        /// 보상 아이템을 아이템 리스트에서 뽑아오는 함수
+        /// </summary>
+        /// <returns></returns>
         public List<Item> Choice_Item()
         {
             ItemList items = new ItemList();
@@ -990,6 +1017,11 @@ namespace FirstProject
             return selectedItems;
         }
 
+        /// <summary>
+        /// 유저에게 보상을 추가하는 함수
+        /// </summary>
+        /// <param name="chr"></param>
+        /// <param name="items"></param>
         public void Add_Reward(CharacterBase chr, Item items)
         {
             if (items.atk != 0)

@@ -280,8 +280,8 @@ namespace FirstProject
                         Console.Write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠀");
                         Console.SetCursorPosition(56, 22);
                         Console.Write("광기 Lv.3");
-                        Console.SetCursorPosition(46, 23);
-                        Console.Write("광기는 치명타 확률을 올려줍니다");
+                        Console.SetCursorPosition(42, 23);
+                        Console.Write("광기는 전투 중 치명타 확률을 올려줍니다");
                         break;
                     }
                 case 2:
