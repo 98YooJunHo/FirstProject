@@ -724,7 +724,8 @@ namespace FirstProject
                                                             {
                                                                 hpPlus = 1;
                                                             }
-                                                            chr.Set_MaxHp(hpPlus);
+                                                            chr.Set_MaxHp(chr.Get_MaxHp() + hpPlus);
+                                                            chr.Set_Hp(chr.Get_Hp() + hpPlus);
                                                             break;
                                                         }
                                                     case 1:                                                        
@@ -734,7 +735,7 @@ namespace FirstProject
                                                             {
                                                                 atkPlus = 1;
                                                             }
-                                                            chr.Set_Atk(atkPlus);
+                                                            chr.Set_Atk(chr.Get_Atk() + atkPlus);
                                                             break;
                                                         }
                                                     case 2:
@@ -744,7 +745,7 @@ namespace FirstProject
                                                             {
                                                                 armPlus = 1;
                                                             }
-                                                            chr.Set_Arm(armPlus);
+                                                            chr.Set_Arm(chr.Get_Arm() + armPlus);
                                                             break;
                                                         }
                                                     case 3:
@@ -754,7 +755,7 @@ namespace FirstProject
                                                             {
                                                                 criPlus = 1;
                                                             }
-                                                            chr.Set_Cri(criPlus);
+                                                            chr.Set_Cri(chr.Get_Cri() + criPlus);
                                                             break;
                                                         }
                                                     case 4:
@@ -764,7 +765,7 @@ namespace FirstProject
                                                             {
                                                                 avoidPlus = 1;
                                                             }
-                                                            chr.Set_Avoid(avoidPlus);
+                                                            chr.Set_Avoid(chr.Get_Avoid() + avoidPlus);
                                                             break;
                                                         }
                                                 }
