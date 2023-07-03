@@ -756,18 +756,16 @@ namespace FirstProject
                                         }
                                         Console.SetCursorPosition(53, 9);
                                         Console.Write("보상을 선택하세요");
-                                        Console.SetCursorPosition(46, 13);
-                                        Console.Write(items_[0].name);
-                                        Console.SetCursorPosition(59, 13);
-                                        Console.Write(items_[1].name);
-                                        Console.SetCursorPosition(72, 13);
-                                        Console.Write(items_[2].name);
-                                        Console.SetCursorPosition(45, 14);
-                                        Console.Write(items_[0].abilityName + "lv." + items_[0].abilityLvl);
-                                        Console.SetCursorPosition(58, 14);
-                                        Console.Write(items_[1].abilityName + "lv." + items_[1].abilityLvl);
-                                        Console.SetCursorPosition(71, 14);
-                                        Console.Write(items_[2].abilityName + "lv." + items_[2].abilityLvl);
+                                        for(int i = 0; i < 3; i++)
+                                        {
+                                            Console.SetCursorPosition(46 + i * 13, 13);
+                                            Console.Write(items_[i].name);
+                                            if (items_[i].abilityName != null)
+                                            {
+                                                Console.SetCursorPosition(45 + i * 13, 14);
+                                                Console.Write(items_[i].abilityName + "lv." + items_[i].abilityLvl);
+                                            }
+                                        }
                                         // 아이템 스탯 표시
                                         for (int i = 0; i < 3; i++)
                                         {
